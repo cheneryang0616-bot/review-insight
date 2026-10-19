@@ -67,7 +67,8 @@ def iv_table(df: pd.DataFrame, top_k: int = 8, bins: Optional[int] = None) -> di
 
 # ------------------------------------------------------------ 3. 单变量分箱
 @tool("woe_table", "单变量 WOE 分箱明细（每箱样本、坏账率、WOE），检查单调性",
-      {"feature": "变量名（必需）", "bins": "分箱数，默认 10"})
+      {"feature": "变量名（必需）", "bins": "分箱数，默认 10"},
+      required=("feature",))
 def woe_table(df: pd.DataFrame, feature: str, bins: Optional[int] = None) -> dict:
     feats = df.attrs.get("features", [])
     if feature not in feats:
@@ -150,7 +151,8 @@ def cutoff_tradeoff(df: pd.DataFrame, exclude_forbidden: int = 0,
 
 # ------------------------------------------------------------ 6. 分群坏账率
 @tool("segment_bad_rate", "按某个变量分群的坏账率（找高风险客群）",
-      {"feature": "变量名（必需）", "bins": "分群数，默认 5"})
+      {"feature": "变量名（必需）", "bins": "分群数，默认 5"},
+      required=("feature",))
 def segment_bad_rate(df: pd.DataFrame, feature: str, bins: int = 5) -> dict:
     feats = df.attrs.get("features", [])
     if feature not in feats:

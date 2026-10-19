@@ -50,11 +50,22 @@ GATES = [
 ]
 
 
+CLARIFY_HINT = """- 数据体检（「数据整体什么情况」）
+- 变量 IV 排序（「哪个变量 IV 最高」）
+- 单变量分箱（「把额度使用率分箱看一下」——需要指明变量名）
+- 模型指标（「模型效果怎么样」，AUC/KS/Gini）
+- 通过率权衡（「通过率压到 70% 会怎样」）
+- 评分刻度（「评分怎么映射，PDO 50」）
+- 合规检查（「合规吗」「剔除性别字段后会怎样」）
+- 客户案例（「给我看几个坏客户」）"""
+
+
 class CreditDomain(Domain):
     name = "credit"
     registry = tools.REGISTRY
     plan_spec = planner_spec.PLAN_SPEC
     system_prompt = SYSTEM_PROMPT
+    clarify_hint = CLARIFY_HINT
     gates = GATES
 
     def load(self):

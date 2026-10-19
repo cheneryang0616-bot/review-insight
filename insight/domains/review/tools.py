@@ -23,8 +23,12 @@ tool = REGISTRY.tool            # 装饰器签名不变：@tool(name, desc, para
 
 def _result(tool_name: str, params: dict, table: List[dict], facts: dict,
             note: str = "") -> dict:
+    """统一出口。样本为 0 时显式打 insufficient 标记，
+    让编排层知道"这不是答案，这是算不出来"，从而触发放宽切片或反问。"""
+    empty = (not facts) or facts.get("n") == 0 or facts.get("shops_compared") == 0 \
+        or facts.get("deals_compared") == 0
     return {"tool": tool_name, "params": params, "table": table,
-            "facts": facts, "note": note}
+            "facts": facts, "note": note, "insufficient": bool(empty)}
 
 
 def _pct(x: float) -> str:

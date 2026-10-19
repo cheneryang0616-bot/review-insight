@@ -18,11 +18,19 @@ class Registry:
         self.name = name
         self.tools: Dict[str, dict] = {}
 
-    def tool(self, name: str, desc: str, params: Dict[str, str]):
+    def tool(self, name: str, desc: str, params: Dict[str, str], required=()):
+        """required：必填参数。缺了不该让工具崩，而应由编排层去反问用户。"""
         def deco(fn: Callable):
-            self.tools[name] = {"name": name, "desc": desc, "params": params, "fn": fn}
+            self.tools[name] = {"name": name, "desc": desc, "params": params,
+                                "required": tuple(required), "fn": fn}
             return fn
         return deco
+
+    def required(self, name: str):
+        return self.tools[name]["required"] if name in self.tools else ()
+
+    def missing_required(self, name: str, params: dict):
+        return [p for p in self.required(name) if p not in (params or {})]
 
     # ------------------------------------------------------------ 调用
     def call(self, name: str, df, **params) -> dict:

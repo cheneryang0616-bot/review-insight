@@ -373,8 +373,7 @@
    "question": "店铺 4134768 的差评情况怎么样？",
    "passed": true,
    "tools": [
-    "star_distribution",
-    "time_slot"
+    "star_distribution"
    ],
    "composer": "template",
    "grounding_rate": 1.0,

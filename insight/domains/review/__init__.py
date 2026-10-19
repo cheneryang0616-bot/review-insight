@@ -40,11 +40,20 @@ GATES = [
 ]
 
 
+CLARIFY_HINT = """- 数据概况与星级分布（「美团评论数据整体什么情况」）
+- 店铺 / 套餐排名（「哪家店差评最多」「哪个套餐差评率最高」）
+- 代金券与套餐对比（「代金券和套餐哪个差评更多」）
+- 差评归因（「为什么差评这么多」「差评都在说什么」）
+- 时间趋势与时段（「最近有没有变差」「哪个时段差评最多」）
+- 原始评论抽样（「给我几条差评原话」）"""
+
+
 class ReviewDomain(Domain):
     name = "review"
     registry = tools.REGISTRY
     plan_spec = planner_spec.PLAN_SPEC
     system_prompt = SYSTEM_PROMPT
+    clarify_hint = CLARIFY_HINT
     gates = GATES
 
     def load(self):

@@ -1,14 +1,13 @@
 {
  "domain": "credit",
  "mode": "离线",
- "dataset": "give_me_some_credit(sample)",
- "total": 8,
- "passed": 8,
+ "dataset": "german_credit",
+ "total": 9,
+ "passed": 9,
  "skipped": [
-  "C06",
-  "C07",
-  "C08",
-  "C09"
+  "C10",
+  "C11",
+  "C12"
  ],
  "cases": [
   {
@@ -177,7 +176,7 @@
    ]
   },
   {
-   "id": "C10",
+   "id": "C06",
    "question": "模型效果怎么样？",
    "passed": true,
    "tools": [
@@ -210,18 +209,17 @@
     {
      "name": "gates",
      "passed": true,
-     "detail": "OK"
+     "detail": "阻断项 ['fair_lending']，期望含 ['fair_lending']"
     }
    ]
   },
   {
-   "id": "C11",
-   "question": "额度使用率的 IV 是多少？",
+   "id": "C07",
+   "question": "合规吗？性别字段能用吗？",
    "passed": true,
    "tools": [
-    "iv_table",
-    "perf_metrics",
-    "woe_table"
+    "forbidden_check",
+    "perf_metrics"
    ],
    "composer": "template",
    "grounding_rate": 1.0,
@@ -245,17 +243,59 @@
      "name": "grounding",
      "passed": true,
      "detail": "OK"
+    },
+    {
+     "name": "gates",
+     "passed": true,
+     "detail": "阻断项 ['fair_lending']，期望含 ['fair_lending']"
     }
    ]
   },
   {
-   "id": "C12",
-   "question": "按年龄分群的坏账率怎么样？",
+   "id": "C08",
+   "question": "剔除性别和外籍劳工字段后模型效果怎么样？",
    "passed": true,
    "tools": [
-    "segment_bad_rate",
-    "iv_table",
-    "woe_table"
+    "cutoff_tradeoff",
+    "perf_metrics"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "gates",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C09",
+   "question": "账户余额档的分箱单调吗？",
+   "passed": true,
+   "tools": [
+    "woe_table",
+    "iv_table"
    ],
    "composer": "template",
    "grounding_rate": 1.0,

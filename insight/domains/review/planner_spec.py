@@ -10,7 +10,8 @@ import pandas as pd
 from ...core.planner import PlanSpec
 
 INTENTS = {
-    "overview": ["概况", "总体", "多少条", "数据集", "样本", "总量", "覆盖"],
+    "overview": ["概况", "总体", "整体", "多少条", "数据集", "样本", "总量",
+                 "覆盖", "什么情况", "情况怎么样", "看看数据"],
     "star": ["星级", "星", "分布", "几星"],
     "shop_rank": ["哪家", "哪些店", "店铺", "门店", "排名", "最差", "最好", "对比店"],
     "deal_rank": ["套餐", "团购", "哪款", "产品", "代金券", "券"],
@@ -91,13 +92,20 @@ def adjust_seq(q: str, ent: dict, seq: list, intents: list) -> list:
     if "aspect" in intents and "trend" in intents:
         seq = ["time_trend", "aspect_gap", "keyword_diff", "sample_comments"]
 
-    # ② 有具体店铺实体时，"店铺排名"吃不到 shop 参数，必须换成单店口径
+    # ② 有具体店铺 + 问到套餐 → 用户要的是"这家店的套餐"，不是全站套餐排名
+    if ent.get("shop") and "deal_rank" in intents:
+        seq = ["deal_ranking", "star_distribution"]
+
+    # ③ 有具体店铺实体时，"店铺排名"吃不到 shop 参数，必须换成单店口径
     if ent.get("shop"):
+        # deal_ranking / deal_type_compare 都吃 shop 参数，不要一起换掉，
+        # 否则"某店的套餐差评率排名"会被回答成星级分布（答非所问）。
         keep = [t for t in seq if t in ("aspect_gap", "keyword_diff", "sample_comments",
-                                        "time_trend", "time_slot")]
+                                        "time_trend", "time_slot", "deal_ranking",
+                                        "deal_type_compare")]
         seq = ["star_distribution"] + keep
 
-    # ③ 抽到具体套餐名：问"问题在哪"就做归因，问"情况如何"才给排名
+    # ④ 抽到具体套餐名：问"问题在哪"就做归因，问"情况如何"才给排名
     if ent.get("deal"):
         if any(w in q for w in ("问题", "为什么", "骂", "差在哪", "原因", "短板",
                                 "吐槽", "抱怨")):

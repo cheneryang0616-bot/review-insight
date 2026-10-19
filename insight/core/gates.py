@@ -69,6 +69,11 @@ def _skip_if_missing(name, desc, level, why):
 def trace_gate(check_fn) -> Gate:
     """把 groundedness.check 包成闸门。check_fn(answer, results) -> dict"""
     def fn(ctx):
+        # 澄清轮没有结论，也没有工具结果：此时做数字回查只会把
+        # 能力清单里的示例数字（"PDO 50"）误判成编造
+        if ctx.get("status") == "clarification":
+            return GateResult("numeric_trace", "澄清轮不做数字回查", INFO, True,
+                              "本轮未产出结论")
         g = check_fn(ctx["answer"], ctx["results"])
         return GateResult("numeric_trace", "答案中所有数字必须可追溯到工具输出",
                           ERROR, g["passed"],
