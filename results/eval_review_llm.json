@@ -1,0 +1,502 @@
+{
+ "domain": "review",
+ "mode": "LLM",
+ "dataset": "",
+ "total": 15,
+ "passed": 12,
+ "skipped": [],
+ "cases": [
+  {
+   "id": "Q01",
+   "question": "美团评论数据整体是什么情况？",
+   "passed": false,
+   "tools": [
+    "dataset_overview"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": false,
+     "detail": "缺 ['star_distribution']"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q02",
+   "question": "星级分布怎么样？",
+   "passed": true,
+   "tools": [
+    "star_distribution"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q03",
+   "question": "哪家店的差评率最高？",
+   "passed": true,
+   "tools": [
+    "shop_ranking"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q04",
+   "question": "哪个套餐差评率最高？",
+   "passed": true,
+   "tools": [
+    "deal_ranking"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q05",
+   "question": "代金券和套餐哪个差评更多？",
+   "passed": true,
+   "tools": [
+    "deal_type_compare"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q06",
+   "question": "为什么差评这么多？短板在哪？",
+   "passed": true,
+   "tools": [
+    "dataset_overview",
+    "aspect_gap",
+    "keyword_diff",
+    "sample_comments"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q07",
+   "question": "差评里用户都在说什么？",
+   "passed": true,
+   "tools": [
+    "keyword_diff",
+    "aspect_gap",
+    "sample_comments"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q08",
+   "question": "最近的差评率有没有变差？",
+   "passed": true,
+   "tools": [
+    "time_trend"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q09",
+   "question": "哪个时段差评最多？",
+   "passed": false,
+   "tools": [
+    "time_slot"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": false,
+     "detail": "[('high_slot', '周五', '22:00')]"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q10",
+   "question": "给我几条差评原话看看",
+   "passed": true,
+   "tools": [
+    "sample_comments"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q11",
+   "question": "2020年代金券和套餐的差评率分别是多少？",
+   "passed": true,
+   "tools": [
+    "deal_type_compare"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q12",
+   "question": "店铺 4134768 的差评情况怎么样？",
+   "passed": false,
+   "tools": [
+    "star_distribution",
+    "aspect_gap",
+    "time_trend",
+    "sample_comments"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": false,
+     "detail": "[('n', 873, 5)]"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q13",
+   "question": "那这家店的差评主要在骂什么？",
+   "passed": true,
+   "tools": [
+    "aspect_gap",
+    "keyword_diff",
+    "sample_comments"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q14",
+   "question": "50元代金券（菜品）1张 这个套餐的问题在哪？",
+   "passed": true,
+   "tools": [
+    "aspect_gap",
+    "keyword_diff",
+    "sample_comments"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "Q15",
+   "question": "2019年的差评趋势怎么样？",
+   "passed": true,
+   "tools": [
+    "time_trend"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  }
+ ]
+}

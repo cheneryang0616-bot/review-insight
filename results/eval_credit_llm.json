@@ -1,0 +1,317 @@
+{
+ "domain": "credit",
+ "mode": "LLM",
+ "dataset": "german_credit",
+ "total": 9,
+ "passed": 6,
+ "skipped": [
+  "C10",
+  "C11",
+  "C12"
+ ],
+ "cases": [
+  {
+   "id": "C01",
+   "question": "数据整体什么情况？",
+   "passed": false,
+   "tools": [
+    "dataset_profile"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": false,
+     "detail": "缺 ['iv_table']"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C02",
+   "question": "哪个变量的 IV 最高？",
+   "passed": true,
+   "tools": [
+    "iv_table"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C03",
+   "question": "通过率压到 70% 坏账率会怎样？",
+   "passed": true,
+   "tools": [
+    "cutoff_tradeoff"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C04",
+   "question": "给我看几个坏客户案例",
+   "passed": true,
+   "tools": [
+    "sample_cases"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C05",
+   "question": "评分刻度怎么映射？基准分 600、PDO 50",
+   "passed": false,
+   "tools": [
+    "score_scale"
+   ],
+   "composer": "llm",
+   "grounding_rate": 0.913,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": false,
+     "detail": "未支撑 ['167', '90']"
+    }
+   ]
+  },
+  {
+   "id": "C06",
+   "question": "模型效果怎么样？",
+   "passed": true,
+   "tools": [
+    "perf_metrics"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "gates",
+     "passed": true,
+     "detail": "阻断项 ['fair_lending']，期望含 ['fair_lending']"
+    }
+   ]
+  },
+  {
+   "id": "C07",
+   "question": "合规吗？性别字段能用吗？",
+   "passed": false,
+   "tools": [
+    "forbidden_check"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "gates",
+     "passed": false,
+     "detail": "阻断项 []，期望含 ['fair_lending']"
+    }
+   ]
+  },
+  {
+   "id": "C08",
+   "question": "剔除性别和外籍劳工字段后模型效果怎么样？",
+   "passed": true,
+   "tools": [
+    "perf_metrics"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "gates",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C09",
+   "question": "账户余额档的分箱单调吗？",
+   "passed": true,
+   "tools": [
+    "woe_table"
+   ],
+   "composer": "llm",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  }
+ ]
+}

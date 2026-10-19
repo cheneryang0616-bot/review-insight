@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# 含个人信息/受竞赛规则约束的原始数据，不进仓库（见 data/README.md）
+data/*.xlsx
+data/*.xls
+data/cs-training.csv
+data/cs-test.csv

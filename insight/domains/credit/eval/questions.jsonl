@@ -1,0 +1,12 @@
+{"id": "C01", "question": "数据整体什么情况？", "expect_tools": ["dataset_profile", "iv_table"]}
+{"id": "C02", "question": "哪个变量的 IV 最高？", "expect_tools": ["iv_table"]}
+{"id": "C03", "question": "通过率压到 70% 坏账率会怎样？", "expect_tools": ["cutoff_tradeoff"], "expect_scope": {"keep": 0.7}}
+{"id": "C04", "question": "给我看几个坏客户案例", "expect_tools": ["sample_cases"], "expect_scope": {"kind": "bad"}}
+{"id": "C05", "question": "评分刻度怎么映射？基准分 600、PDO 50", "expect_tools": ["score_scale"], "expect_facts": {"base": 600, "pdo": 50}}
+{"id": "C06", "question": "模型效果怎么样？", "dataset": "german", "expect_tools": ["perf_metrics"], "expect_gates": "block", "expect_block_gates": ["fair_lending"]}
+{"id": "C07", "question": "合规吗？性别字段能用吗？", "dataset": "german", "expect_tools": ["forbidden_check"], "expect_gates": "block", "expect_block_gates": ["fair_lending"]}
+{"id": "C08", "question": "剔除性别和外籍劳工字段后模型效果怎么样？", "dataset": "german", "expect_tools": ["perf_metrics"], "expect_facts": {"exclude_forbidden": 1}, "expect_gates": "pass"}
+{"id": "C09", "question": "账户余额档的分箱单调吗？", "dataset": "german", "expect_tools": ["woe_table"], "expect_scope": {"feature": "account_balance"}}
+{"id": "C10", "question": "模型效果怎么样？", "dataset": "give_me", "expect_tools": ["perf_metrics"], "expect_gates": "pass"}
+{"id": "C11", "question": "额度使用率的 IV 是多少？", "dataset": "give_me", "expect_tools": ["iv_table", "woe_table"]}
+{"id": "C12", "question": "按年龄分群的坏账率怎么样？", "dataset": "give_me", "expect_tools": ["segment_bad_rate"], "expect_scope": {"feature": "age"}}

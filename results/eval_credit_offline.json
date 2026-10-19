@@ -1,0 +1,286 @@
+{
+ "domain": "credit",
+ "mode": "离线",
+ "dataset": "give_me_some_credit(sample)",
+ "total": 8,
+ "passed": 8,
+ "skipped": [
+  "C06",
+  "C07",
+  "C08",
+  "C09"
+ ],
+ "cases": [
+  {
+   "id": "C01",
+   "question": "数据整体什么情况？",
+   "passed": true,
+   "tools": [
+    "dataset_profile",
+    "iv_table"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C02",
+   "question": "哪个变量的 IV 最高？",
+   "passed": true,
+   "tools": [
+    "iv_table",
+    "perf_metrics"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C03",
+   "question": "通过率压到 70% 坏账率会怎样？",
+   "passed": true,
+   "tools": [
+    "cutoff_tradeoff",
+    "perf_metrics"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C04",
+   "question": "给我看几个坏客户案例",
+   "passed": true,
+   "tools": [
+    "sample_cases",
+    "dataset_profile"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C05",
+   "question": "评分刻度怎么映射？基准分 600、PDO 50",
+   "passed": true,
+   "tools": [
+    "score_scale",
+    "perf_metrics"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C10",
+   "question": "模型效果怎么样？",
+   "passed": true,
+   "tools": [
+    "perf_metrics",
+    "cutoff_tradeoff"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "gates",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C11",
+   "question": "额度使用率的 IV 是多少？",
+   "passed": true,
+   "tools": [
+    "iv_table",
+    "perf_metrics",
+    "woe_table"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  },
+  {
+   "id": "C12",
+   "question": "按年龄分群的坏账率怎么样？",
+   "passed": true,
+   "tools": [
+    "segment_bad_rate",
+    "iv_table",
+    "woe_table"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    }
+   ]
+  }
+ ]
+}
