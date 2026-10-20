@@ -10,6 +10,7 @@
 6. 文本长度 < 4 字的标记为 usable_text=False，文本类分析必须过滤
 """
 import functools
+import math
 import os
 import re
 from typing import Optional
@@ -27,10 +28,25 @@ _COUPON_WORDS = ("代金券", "现金券", "抵用券", "优惠券", "券")
 _COMBO_WORDS = ("套餐", "双人餐", "人餐", "人套餐", "餐")
 
 
-def classify_deal(deal: Optional[str]) -> str:
+def _is_missing(value) -> bool:
+    """缺失判定要同时容忍 None / float NaN / 字符串 "nan"。
+
+    pandas 2.x 里 `replace({"nan": None})` 得到的是 None，pandas 3.x 会优化成 float NaN；
+    只判 `not deal` 会在 3.x 上直接 TypeError（`w in nan`）——CI 在 3.11 上抓到的就是这个。
+    """
+    if value is None:
+        return True
+    if isinstance(value, float) and math.isnan(value):
+        return True
+    text = str(value).strip()
+    return text == "" or text.lower() in ("nan", "none", "null")
+
+
+def classify_deal(deal) -> str:
     """套餐名 → 业务类型。代金券和套餐的履约方式不同，差评机制也不同。"""
-    if not deal or deal == "nan":
+    if _is_missing(deal):
         return "未标注"
+    deal = str(deal)
     if any(w in deal for w in _COUPON_WORDS):
         return "代金券"
     if any(w in deal for w in _COMBO_WORDS):
