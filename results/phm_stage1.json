@@ -1,0 +1,3444 @@
+{
+  "stage": 1,
+  "mode": "offline_rule_and_template",
+  "passed": true,
+  "checks": {
+    "eight_tools": true,
+    "six_industrial_gates": true,
+    "phase0_preserved": true,
+    "two_week_candidate_units": true,
+    "missed_before_clipping": true,
+    "acceptance_grounded": true,
+    "followup_passes_lead_time": true,
+    "unit_tests": true,
+    "offline_evaluations": true,
+    "loop_evaluations": true,
+    "no_torch": true
+  },
+  "tests": {
+    "total": 179,
+    "passed": 175,
+    "skipped": 4,
+    "failed": 0,
+    "errors": 0
+  },
+  "evaluations": {
+    "phm": {
+      "domain": "phm",
+      "mode": "离线",
+      "dataset": "FD001",
+      "total": 9,
+      "passed": 9,
+      "skipped": [],
+      "cases": [
+        {
+          "id": "phm_phase0_shutdown",
+          "question": "能不能用这个预测区间安排停机检修？",
+          "passed": true,
+          "tools": [
+            "uncertainty_audit",
+            "fleet_overview"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "阻断项 ['coverage_gate']，期望含 ['coverage_gate']"
+            }
+          ]
+        },
+        {
+          "id": "phm_fleet",
+          "question": "机队总览",
+          "passed": true,
+          "tools": [
+            "fleet_overview",
+            "uncertainty_audit"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "阻断项 ['coverage_gate']，期望含 ['coverage_gate']"
+            }
+          ]
+        },
+        {
+          "id": "phm_unit",
+          "question": "机器34健康如何",
+          "passed": true,
+          "tools": [
+            "unit_health",
+            "degradation_rate"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "phm_why",
+          "question": "机器34为什么退化，哪个传感器贡献最高",
+          "passed": true,
+          "tools": [
+            "sensor_attribution",
+            "unit_health"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "phm_threshold",
+          "question": "漏报是误报的10倍，告警阈值怎么选",
+          "passed": true,
+          "tools": [
+            "cost_threshold",
+            "uncertainty_audit"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "阻断项 ['coverage_gate']，期望含 ['coverage_gate']"
+            }
+          ]
+        },
+        {
+          "id": "phm_plan_block",
+          "question": "哪几台两周内必须修",
+          "passed": true,
+          "tools": [
+            "maintenance_plan",
+            "fleet_overview"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "阻断项 ['lead_time_gate']，期望含 ['lead_time_gate']"
+            }
+          ]
+        },
+        {
+          "id": "phm_plan_pass",
+          "question": "哪几台两周内必须修，备件7天到",
+          "passed": true,
+          "tools": [
+            "maintenance_plan",
+            "fleet_overview"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "phm_model",
+          "question": "哪个模型更好",
+          "passed": true,
+          "tools": [
+            "model_compare",
+            "fleet_overview"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "phm_model_chosen",
+          "question": "模型对比，选用GBDT",
+          "passed": true,
+          "tools": [
+            "model_compare",
+            "fleet_overview"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        }
+      ]
+    },
+    "review": {
+      "domain": "review",
+      "mode": "离线",
+      "dataset": "",
+      "total": 15,
+      "passed": 15,
+      "skipped": [],
+      "cases": [
+        {
+          "id": "Q01",
+          "question": "美团评论数据整体是什么情况？",
+          "passed": true,
+          "tools": [
+            "dataset_overview",
+            "star_distribution"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q02",
+          "question": "星级分布怎么样？",
+          "passed": true,
+          "tools": [
+            "star_distribution"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q03",
+          "question": "哪家店的差评率最高？",
+          "passed": true,
+          "tools": [
+            "shop_ranking",
+            "time_slot"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q04",
+          "question": "哪个套餐差评率最高？",
+          "passed": true,
+          "tools": [
+            "deal_ranking",
+            "deal_type_compare"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q05",
+          "question": "代金券和套餐哪个差评更多？",
+          "passed": true,
+          "tools": [
+            "deal_ranking",
+            "deal_type_compare"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q06",
+          "question": "为什么差评这么多？短板在哪？",
+          "passed": true,
+          "tools": [
+            "aspect_gap",
+            "keyword_diff",
+            "sample_comments"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q07",
+          "question": "差评里用户都在说什么？",
+          "passed": true,
+          "tools": [
+            "keyword_diff",
+            "sample_comments"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q08",
+          "question": "最近的差评率有没有变差？",
+          "passed": true,
+          "tools": [
+            "time_trend",
+            "time_slot"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q09",
+          "question": "哪个时段差评最多？",
+          "passed": true,
+          "tools": [
+            "time_slot",
+            "time_trend"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q10",
+          "question": "给我几条差评原话看看",
+          "passed": true,
+          "tools": [
+            "sample_comments"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q11",
+          "question": "2020年代金券和套餐的差评率分别是多少？",
+          "passed": true,
+          "tools": [
+            "deal_ranking",
+            "deal_type_compare"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q12",
+          "question": "店铺 4134768 的差评情况怎么样？",
+          "passed": true,
+          "tools": [
+            "star_distribution"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q13",
+          "question": "那这家店的差评主要在骂什么？",
+          "passed": true,
+          "tools": [
+            "star_distribution",
+            "aspect_gap",
+            "keyword_diff",
+            "sample_comments"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q14",
+          "question": "50元代金券（菜品）1张 这个套餐的问题在哪？",
+          "passed": true,
+          "tools": [
+            "aspect_gap",
+            "keyword_diff",
+            "sample_comments"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "Q15",
+          "question": "2019年的差评趋势怎么样？",
+          "passed": true,
+          "tools": [
+            "time_trend",
+            "time_slot"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        }
+      ]
+    },
+    "credit": {
+      "domain": "credit",
+      "mode": "离线",
+      "dataset": "give_me_some_credit(sample)",
+      "total": 8,
+      "passed": 8,
+      "skipped": [
+        "C06",
+        "C07",
+        "C08",
+        "C09"
+      ],
+      "cases": [
+        {
+          "id": "C01",
+          "question": "数据整体什么情况？",
+          "passed": true,
+          "tools": [
+            "dataset_profile",
+            "iv_table"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "C02",
+          "question": "哪个变量的 IV 最高？",
+          "passed": true,
+          "tools": [
+            "iv_table",
+            "perf_metrics"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "C03",
+          "question": "通过率压到 70% 坏账率会怎样？",
+          "passed": true,
+          "tools": [
+            "cutoff_tradeoff",
+            "perf_metrics"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "C04",
+          "question": "给我看几个坏客户案例",
+          "passed": true,
+          "tools": [
+            "sample_cases",
+            "dataset_profile"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "C05",
+          "question": "评分刻度怎么映射？基准分 600、PDO 50",
+          "passed": true,
+          "tools": [
+            "score_scale",
+            "perf_metrics"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "C10",
+          "question": "模型效果怎么样？",
+          "passed": true,
+          "tools": [
+            "perf_metrics",
+            "cutoff_tradeoff"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "C11",
+          "question": "额度使用率的 IV 是多少？",
+          "passed": true,
+          "tools": [
+            "iv_table",
+            "perf_metrics",
+            "woe_table"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "C12",
+          "question": "按年龄分群的坏账率怎么样？",
+          "passed": true,
+          "tools": [
+            "segment_bad_rate",
+            "iv_table",
+            "woe_table"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "loop": {
+    "total": 12,
+    "passed": 12,
+    "cases": [
+      {
+        "domain": "review",
+        "id": "L1",
+        "question": "把 Income 分箱看一下",
+        "status": "clarification",
+        "tools": [
+          "dataset_overview",
+          "star_distribution"
+        ],
+        "passed": true,
+        "why": "review 域没有分箱能力，不该静默给默认答案"
+      },
+      {
+        "domain": "review",
+        "id": "L2",
+        "question": "这个指标的口径是怎么定义的",
+        "status": "clarification",
+        "tools": [
+          "dataset_overview",
+          "star_distribution"
+        ],
+        "passed": true,
+        "why": "完全没听懂的问题应澄清而不是猜"
+      },
+      {
+        "domain": "review",
+        "id": "L3",
+        "question": "2004 年的差评归因",
+        "status": "ok",
+        "tools": [
+          "aspect_gap",
+          "keyword_diff",
+          "sample_comments"
+        ],
+        "passed": true,
+        "why": "2004 年样本极少，应放宽切片后仍给出结论"
+      },
+      {
+        "domain": "review",
+        "id": "L4",
+        "question": "店铺 4134768 的套餐差评率排名",
+        "status": "ok",
+        "tools": [
+          "star_distribution",
+          "deal_ranking"
+        ],
+        "passed": true,
+        "why": "shop 实体不该把套餐排名工具整个换掉"
+      },
+      {
+        "domain": "review",
+        "id": "L5",
+        "question": "为什么差评这么多？短板在哪？",
+        "status": "ok",
+        "tools": [
+          "aspect_gap",
+          "keyword_diff",
+          "sample_comments"
+        ],
+        "passed": true,
+        "why": "正常问题不该被误判成需要澄清"
+      },
+      {
+        "domain": "credit",
+        "id": "C-L1",
+        "question": "看下这个变量的分箱",
+        "status": "clarification",
+        "tools": [
+          "woe_table",
+          "iv_table"
+        ],
+        "passed": true,
+        "why": "woe_table 缺必填 feature，应反问并给候选"
+      },
+      {
+        "domain": "credit",
+        "id": "C-L2",
+        "question": "把 Income 分箱看一下",
+        "status": "clarification",
+        "tools": [
+          "woe_table",
+          "iv_table"
+        ],
+        "passed": true,
+        "why": "字段名不存在，应给候选而不是报错"
+      },
+      {
+        "domain": "credit",
+        "id": "C-L3",
+        "question": "模型效果怎么样？",
+        "status": "ok",
+        "tools": [
+          "perf_metrics",
+          "cutoff_tradeoff"
+        ],
+        "passed": true,
+        "why": "正常问题不该被误判"
+      },
+      {
+        "domain": "credit",
+        "id": "C-L4",
+        "question": "评分刻度怎么映射？",
+        "status": "ok",
+        "tools": [
+          "score_scale",
+          "perf_metrics"
+        ],
+        "passed": true,
+        "why": "正常问题不该被误判"
+      },
+      {
+        "domain": "phm",
+        "id": "P-L1",
+        "question": "这台还能飞多久",
+        "status": "clarification",
+        "tools": [
+          "unit_health",
+          "degradation_rate"
+        ],
+        "passed": true,
+        "why": "单机健康缺 unit，应反问并列出机器范围"
+      },
+      {
+        "domain": "phm",
+        "id": "P-L2",
+        "question": "请帮我分析明天的股票行情",
+        "status": "clarification",
+        "tools": [
+          "fleet_overview",
+          "uncertainty_audit"
+        ],
+        "passed": true,
+        "why": "领域外意图应返回 PHM 能力清单"
+      },
+      {
+        "domain": "phm",
+        "id": "P-L3",
+        "question": "机器1的健康如何",
+        "status": "degraded",
+        "tools": [
+          "unit_health",
+          "degradation_rate"
+        ],
+        "passed": true,
+        "why": "FD001机器1仅31循环，不足两诊断窗口；样例模式也无原始序列，均应诚实降级"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "path": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+      "bytes": 7872,
+      "sha256": "326dddb4af8560050c132c25678c8115a6b2878200a6184bd32528d4685bb9c0"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/src/cmapss/metrics.py",
+      "bytes": 3261,
+      "sha256": "c1ed0dc9b82c7797f26d3be7596188f8414d4c3c63ccd6ae2643d0db6125ed61"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/data/train_FD001.txt",
+      "bytes": 3515356,
+      "sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/data/test_FD001.txt",
+      "bytes": 2228855,
+      "sha256": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/data/RUL_FD001.txt",
+      "bytes": 429,
+      "sha256": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/artifacts/summary_FD001.json",
+      "bytes": 4288,
+      "sha256": "7e12655e3ba9d00e0fddfd45df4e6b4554c9691df15374fd46d196b30b2a62bd"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/report.json",
+      "bytes": 17115,
+      "sha256": "c35661d0ad830d7cabe9cf09612c19b6225f089e6357d28cb638b737283a170b"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_gbdt/report.json",
+      "bytes": 2626,
+      "sha256": "59a548131bf43df1d3dc810e20b9c068fb68b40c92b8f51495822b57167081c4"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/artifacts/FD001_patch_transformer_w30_mrul125_final/report.json",
+      "bytes": 6223,
+      "sha256": "e87658ab85faa47cb2771be9a888f6361a1ef2cd22e19b42d3b29851d742bf3e"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/artifacts/FD001_legacy_cnn_bilstm_w30_mrul125_final/report.json",
+      "bytes": 6215,
+      "sha256": "e3d227118c45c06b511903c1b5b8b1b81aa80e2b1560bbf807904a8ee95411cf"
+    },
+    {
+      "path": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_transformer_w30_mrul125_final/report.json",
+      "bytes": 6202,
+      "sha256": "fc3916fdbc314c43592685d08013542b4cc96f70a6a50ea3d3fdc92c6ca22edd"
+    }
+  ],
+  "array_locator": "predictions.npz::field[u_test == unit]",
+  "snapshots": {
+    "phase0_interval": {
+      "domain": "phm",
+      "question": "能不能用这个预测区间安排停机检修？",
+      "status": "ok",
+      "clarification": null,
+      "plan": [
+        {
+          "tool": "uncertainty_audit",
+          "params": {}
+        },
+        {
+          "tool": "fleet_overview",
+          "params": {}
+        }
+      ],
+      "planner": "rule",
+      "reason": "命中意图 ['uncertain', 'plan']，实体 无",
+      "scope": {},
+      "results": [
+        {
+          "tool": "uncertainty_audit",
+          "params": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0
+          },
+          "table": [
+            {
+              "名义覆盖率": "95%",
+              "实测覆盖率": "56.00%",
+              "缺口(百分点)": "39.00",
+              "平均标准差(循环)": "5.22",
+              "准入覆盖率": "85%",
+              "覆盖率准入": "阻断"
+            }
+          ],
+          "facts": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0,
+            "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "bad_units": [],
+            "pipeline_ok": true,
+            "u_count": 100,
+            "y_count": 100,
+            "rul_count": 100,
+            "panel_unit_count": 100,
+            "alignment_checked": true,
+            "labels_match": true,
+            "end_cycles_match": true,
+            "unit_alignment_ok": true,
+            "n": 100,
+            "nominal": 0.95,
+            "empirical_coverage": 0.56,
+            "gap_pt": 38.99999999999999,
+            "mean_sigma": 5.223652765750885,
+            "min_coverage": 0.85,
+            "usable_for_decision": false
+          },
+          "note": "带标签仿真测试集复算 pred ± 1.96σ 闭区间覆盖率；回顾性审计不是在线故障概率。",
+          "insufficient": false
+        },
+        {
+          "tool": "fleet_overview",
+          "params": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0
+          },
+          "table": [
+            {
+              "测试机器数": 100,
+              "预测不超过30循环": 20,
+              "预测不超过60循环": 35,
+              "RUL中位数": "89.49",
+              "最短RUL机器": 34
+            }
+          ],
+          "facts": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0,
+            "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "bad_units": [],
+            "pipeline_ok": true,
+            "u_count": 100,
+            "y_count": 100,
+            "rul_count": 100,
+            "panel_unit_count": 100,
+            "alignment_checked": true,
+            "labels_match": true,
+            "end_cycles_match": true,
+            "unit_alignment_ok": true,
+            "units": 100,
+            "need_service_30": 20,
+            "need_service_60": 35,
+            "median_rul": 89.49304580688477,
+            "worst_unit": 34,
+            "service_near": 30,
+            "service_mid": 60
+          },
+          "note": "按预测分档，属于人工复核候选；C-MAPSS 是仿真数据。",
+          "insufficient": false
+        }
+      ],
+      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final。RUL 单位为运行循环数。\n\n### 事实\n- 名义覆盖率 95%，实测覆盖率 **56%**，缺口 39.00 个百分点；准入线 85%。[T1]\n- 预测标准差均值 5.22 循环；覆盖率准入未通过。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n\n### 结论\n1. 不能用这个预测区间安排停机检修：覆盖率未达到准入线，coverage_gate 阻断。应先使用独立校准集开展共形预测校准，并重新验证覆盖率。[T1]\n2. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n3. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
+      "composer": "template",
+      "grounding": {
+        "checked": 16,
+        "supported": 16,
+        "unsupported": [],
+        "skipped_structural": 6,
+        "rate": 1.0,
+        "passed": true,
+        "citations": [
+          1,
+          2
+        ],
+        "cite_ok": true,
+        "pool_size": 58
+      },
+      "gates": {
+        "results": [
+          {
+            "name": "numeric_trace",
+            "desc": "答案中所有数字必须可追溯到工具输出",
+            "level": "error",
+            "passed": true,
+            "detail": "16/16 可追溯",
+            "value": 1.0
+          },
+          {
+            "name": "tool_health",
+            "desc": "所有工具调用必须成功",
+            "level": "error",
+            "passed": true,
+            "detail": "全部成功",
+            "value": null
+          },
+          {
+            "name": "coverage_gate",
+            "desc": "区间实测覆盖率须达到准入线",
+            "level": "error",
+            "passed": false,
+            "detail": "区间覆盖率未达到准入线，禁止用该区间安排停机检修",
+            "value": 0.56
+          },
+          {
+            "name": "lead_time_gate",
+            "desc": "维护候选必须等得到备件",
+            "level": "error",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: n_missed）",
+            "value": null
+          },
+          {
+            "name": "rul_monotone",
+            "desc": "预测 RUL 必须非负",
+            "level": "error",
+            "passed": true,
+            "detail": "无",
+            "value": []
+          },
+          {
+            "name": "threshold_monotone",
+            "desc": "漏报成本比上升时告警阈值不得下降",
+            "level": "warn",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: threshold_violations）",
+            "value": null
+          },
+          {
+            "name": "model_selection",
+            "desc": "所选比较模型的 NASA-Score 不得劣于最优值",
+            "level": "warn",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: nasa_gap）",
+            "value": null
+          },
+          {
+            "name": "pipeline_selfcheck",
+            "desc": "预测、原始 RUL 和原始序列必须按机器对齐",
+            "level": "error",
+            "passed": true,
+            "detail": "通过",
+            "value": true
+          }
+        ],
+        "checked": 8,
+        "passed": false,
+        "blocking": [
+          {
+            "name": "coverage_gate",
+            "desc": "区间实测覆盖率须达到准入线",
+            "level": "error",
+            "passed": false,
+            "detail": "区间覆盖率未达到准入线，禁止用该区间安排停机检修",
+            "value": 0.56
+          }
+        ],
+        "warnings": []
+      },
+      "trajectory": [
+        {
+          "turn": 1,
+          "calls": [
+            "uncertainty_audit",
+            "fleet_overview"
+          ],
+          "issues": []
+        }
+      ],
+      "turns": 1,
+      "llm_error": null
+    },
+    "two_week_plan": {
+      "domain": "phm",
+      "question": "哪几台两周内必须修",
+      "status": "ok",
+      "clarification": null,
+      "plan": [
+        {
+          "tool": "maintenance_plan",
+          "params": {
+            "window_days": 14
+          }
+        },
+        {
+          "tool": "fleet_overview",
+          "params": {
+            "window_days": 14
+          }
+        }
+      ],
+      "planner": "rule",
+      "reason": "命中意图 ['plan', 'fleet']，实体 {'window_days': 14}",
+      "scope": {
+        "window_days": 14
+      },
+      "results": [
+        {
+          "tool": "maintenance_plan",
+          "params": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0
+          },
+          "table": [
+            {
+              "机器": 34,
+              "预测RUL(循环)": "9.66",
+              "候选维护日(相对今天)": "9.66",
+              "原始下单日": "-4.34",
+              "建议下单日": "0.00",
+              "备件来不及": "是"
+            },
+            {
+              "机器": 81,
+              "预测RUL(循环)": "10.80",
+              "候选维护日(相对今天)": "10.80",
+              "原始下单日": "-3.20",
+              "建议下单日": "0.00",
+              "备件来不及": "是"
+            }
+          ],
+          "facts": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0,
+            "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "bad_units": [],
+            "pipeline_ok": true,
+            "u_count": 100,
+            "y_count": 100,
+            "rul_count": 100,
+            "panel_unit_count": 100,
+            "alignment_checked": true,
+            "labels_match": true,
+            "end_cycles_match": true,
+            "unit_alignment_ok": true,
+            "n_orders": 2,
+            "n_missed": 2,
+            "earliest_unit": 34,
+            "latest_order_day": 0.0,
+            "missed_units": [
+              34,
+              81
+            ],
+            "order_units": [
+              34,
+              81
+            ]
+          },
+          "note": "按点预测升序生成规则候选工单，不是从历史工单学习。service_day=pred/cycles_per_day，raw_order_day=service_day−lead_time_days；先用 raw_order_day<0 统计来不及到货，再把建议下单日截到零。未校验维修容量与真实停机窗口，不批准生产停机。",
+          "insufficient": false,
+          "orders": [
+            {
+              "unit": 34,
+              "pred_rul": 9.66119384765625,
+              "service_day": 9.66119384765625,
+              "raw_order_day": -4.33880615234375,
+              "order_day": 0.0,
+              "missed": true
+            },
+            {
+              "unit": 81,
+              "pred_rul": 10.802578926086426,
+              "service_day": 10.802578926086426,
+              "raw_order_day": -3.197421073913574,
+              "order_day": 0.0,
+              "missed": true
+            }
+          ]
+        },
+        {
+          "tool": "fleet_overview",
+          "params": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0
+          },
+          "table": [
+            {
+              "测试机器数": 100,
+              "预测不超过30循环": 20,
+              "预测不超过60循环": 35,
+              "RUL中位数": "89.49",
+              "最短RUL机器": 34
+            }
+          ],
+          "facts": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0,
+            "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "bad_units": [],
+            "pipeline_ok": true,
+            "u_count": 100,
+            "y_count": 100,
+            "rul_count": 100,
+            "panel_unit_count": 100,
+            "alignment_checked": true,
+            "labels_match": true,
+            "end_cycles_match": true,
+            "unit_alignment_ok": true,
+            "units": 100,
+            "need_service_30": 20,
+            "need_service_60": 35,
+            "median_rul": 89.49304580688477,
+            "worst_unit": 34,
+            "service_near": 30,
+            "service_mid": 60
+          },
+          "note": "按预测分档，属于人工复核候选；C-MAPSS 是仿真数据。",
+          "insufficient": false
+        }
+      ],
+      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final。RUL 单位为运行循环数。\n\n### 事实\n- 未来 14 天的点预测候选为 2 台，备件来不及的有 2 台。[T1]\n- 候选机器 34：预计相对今天第 9.66 天维护，原始下单日 -4.34，建议下单日 0.00；备件来不及，当前方案不可执行。[T1]\n- 候选机器 81：预计相对今天第 10.80 天维护，原始下单日 -3.20，建议下单日 0.00；备件来不及，当前方案不可执行。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n\n### 结论\n1. 本轮是点预测或代理指标复核；缺少完整约束与区间准入验证，不能据此授权生产停机。\n2. lead_time_gate 阻断：2 台候选机器今天下单也来不及。需人工核实库存、供应提前期与维护窗口后重算；当前清单不可执行。[T1]\n3. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n4. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
+      "composer": "template",
+      "grounding": {
+        "checked": 20,
+        "supported": 20,
+        "unsupported": [],
+        "skipped_structural": 10,
+        "rate": 1.0,
+        "passed": true,
+        "citations": [
+          1,
+          2
+        ],
+        "cite_ok": true,
+        "pool_size": 57
+      },
+      "gates": {
+        "results": [
+          {
+            "name": "numeric_trace",
+            "desc": "答案中所有数字必须可追溯到工具输出",
+            "level": "error",
+            "passed": true,
+            "detail": "20/20 可追溯",
+            "value": 1.0
+          },
+          {
+            "name": "tool_health",
+            "desc": "所有工具调用必须成功",
+            "level": "error",
+            "passed": true,
+            "detail": "全部成功",
+            "value": null
+          },
+          {
+            "name": "coverage_gate",
+            "desc": "区间实测覆盖率须达到准入线",
+            "level": "error",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: empirical_coverage）",
+            "value": null
+          },
+          {
+            "name": "lead_time_gate",
+            "desc": "维护候选必须等得到备件",
+            "level": "error",
+            "passed": false,
+            "detail": "存在今天下单也无法及时到货的机器，当前候选方案不可执行",
+            "value": 2
+          },
+          {
+            "name": "rul_monotone",
+            "desc": "预测 RUL 必须非负",
+            "level": "error",
+            "passed": true,
+            "detail": "无",
+            "value": []
+          },
+          {
+            "name": "threshold_monotone",
+            "desc": "漏报成本比上升时告警阈值不得下降",
+            "level": "warn",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: threshold_violations）",
+            "value": null
+          },
+          {
+            "name": "model_selection",
+            "desc": "所选比较模型的 NASA-Score 不得劣于最优值",
+            "level": "warn",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: nasa_gap）",
+            "value": null
+          },
+          {
+            "name": "pipeline_selfcheck",
+            "desc": "预测、原始 RUL 和原始序列必须按机器对齐",
+            "level": "error",
+            "passed": true,
+            "detail": "通过",
+            "value": true
+          }
+        ],
+        "checked": 8,
+        "passed": false,
+        "blocking": [
+          {
+            "name": "lead_time_gate",
+            "desc": "维护候选必须等得到备件",
+            "level": "error",
+            "passed": false,
+            "detail": "存在今天下单也无法及时到货的机器，当前候选方案不可执行",
+            "value": 2
+          }
+        ],
+        "warnings": []
+      },
+      "trajectory": [
+        {
+          "turn": 1,
+          "calls": [
+            "maintenance_plan",
+            "fleet_overview"
+          ],
+          "issues": []
+        }
+      ],
+      "turns": 1,
+      "llm_error": null
+    },
+    "seven_day_followup": {
+      "domain": "phm",
+      "question": "那提前期改成7天呢",
+      "status": "ok",
+      "clarification": null,
+      "plan": [
+        {
+          "tool": "maintenance_plan",
+          "params": {
+            "lead_time_days": 7,
+            "window_days": 14
+          }
+        },
+        {
+          "tool": "fleet_overview",
+          "params": {
+            "lead_time_days": 7,
+            "window_days": 14
+          }
+        }
+      ],
+      "planner": "rule",
+      "reason": "命中意图 ['plan']，实体 {'lead_time_days': 7, 'window_days': 14}",
+      "scope": {
+        "lead_time_days": 7,
+        "window_days": 14
+      },
+      "results": [
+        {
+          "tool": "maintenance_plan",
+          "params": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 7.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0
+          },
+          "table": [
+            {
+              "机器": 34,
+              "预测RUL(循环)": "9.66",
+              "候选维护日(相对今天)": "9.66",
+              "原始下单日": "2.66",
+              "建议下单日": "2.66",
+              "备件来不及": "否"
+            },
+            {
+              "机器": 81,
+              "预测RUL(循环)": "10.80",
+              "候选维护日(相对今天)": "10.80",
+              "原始下单日": "3.80",
+              "建议下单日": "3.80",
+              "备件来不及": "否"
+            }
+          ],
+          "facts": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 7.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0,
+            "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "bad_units": [],
+            "pipeline_ok": true,
+            "u_count": 100,
+            "y_count": 100,
+            "rul_count": 100,
+            "panel_unit_count": 100,
+            "alignment_checked": true,
+            "labels_match": true,
+            "end_cycles_match": true,
+            "unit_alignment_ok": true,
+            "n_orders": 2,
+            "n_missed": 0,
+            "earliest_unit": 34,
+            "latest_order_day": 3.802578926086426,
+            "missed_units": [],
+            "order_units": [
+              34,
+              81
+            ]
+          },
+          "note": "按点预测升序生成规则候选工单，不是从历史工单学习。service_day=pred/cycles_per_day，raw_order_day=service_day−lead_time_days；先用 raw_order_day<0 统计来不及到货，再把建议下单日截到零。未校验维修容量与真实停机窗口，不批准生产停机。",
+          "insufficient": false,
+          "orders": [
+            {
+              "unit": 34,
+              "pred_rul": 9.66119384765625,
+              "service_day": 9.66119384765625,
+              "raw_order_day": 2.66119384765625,
+              "order_day": 2.66119384765625,
+              "missed": false
+            },
+            {
+              "unit": 81,
+              "pred_rul": 10.802578926086426,
+              "service_day": 10.802578926086426,
+              "raw_order_day": 3.802578926086426,
+              "order_day": 3.802578926086426,
+              "missed": false
+            }
+          ]
+        },
+        {
+          "tool": "fleet_overview",
+          "params": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 7.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0
+          },
+          "table": [
+            {
+              "测试机器数": 100,
+              "预测不超过30循环": 20,
+              "预测不超过60循环": 35,
+              "RUL中位数": "89.49",
+              "最短RUL机器": 34
+            }
+          ],
+          "facts": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 7.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0,
+            "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "bad_units": [],
+            "pipeline_ok": true,
+            "u_count": 100,
+            "y_count": 100,
+            "rul_count": 100,
+            "panel_unit_count": 100,
+            "alignment_checked": true,
+            "labels_match": true,
+            "end_cycles_match": true,
+            "unit_alignment_ok": true,
+            "units": 100,
+            "need_service_30": 20,
+            "need_service_60": 35,
+            "median_rul": 89.49304580688477,
+            "worst_unit": 34,
+            "service_near": 30,
+            "service_mid": 60
+          },
+          "note": "按预测分档，属于人工复核候选；C-MAPSS 是仿真数据。",
+          "insufficient": false
+        }
+      ],
+      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final。RUL 单位为运行循环数。\n\n### 事实\n- 未来 14 天的点预测候选为 2 台，备件来不及的有 0 台。[T1]\n- 候选机器 34：预计相对今天第 9.66 天维护，原始下单日 2.66，建议下单日 2.66；提前期检查通过，仍待人工复核。[T1]\n- 候选机器 81：预计相对今天第 10.80 天维护，原始下单日 3.80，建议下单日 3.80；提前期检查通过，仍待人工复核。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n\n### 结论\n1. 本轮是点预测或代理指标复核；缺少完整约束与区间准入验证，不能据此授权生产停机。\n2. 当前候选清单的提前期约束通过；未验证维修容量与真实停机窗口，仍需人工复核。[T1]\n3. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 7 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n4. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
+      "composer": "template",
+      "grounding": {
+        "checked": 19,
+        "supported": 19,
+        "unsupported": [],
+        "skipped_structural": 10,
+        "rate": 1.0,
+        "passed": true,
+        "citations": [
+          1,
+          2
+        ],
+        "cite_ok": true,
+        "pool_size": 57
+      },
+      "gates": {
+        "results": [
+          {
+            "name": "numeric_trace",
+            "desc": "答案中所有数字必须可追溯到工具输出",
+            "level": "error",
+            "passed": true,
+            "detail": "19/19 可追溯",
+            "value": 1.0
+          },
+          {
+            "name": "tool_health",
+            "desc": "所有工具调用必须成功",
+            "level": "error",
+            "passed": true,
+            "detail": "全部成功",
+            "value": null
+          },
+          {
+            "name": "coverage_gate",
+            "desc": "区间实测覆盖率须达到准入线",
+            "level": "error",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: empirical_coverage）",
+            "value": null
+          },
+          {
+            "name": "lead_time_gate",
+            "desc": "维护候选必须等得到备件",
+            "level": "error",
+            "passed": true,
+            "detail": "通过",
+            "value": 0
+          },
+          {
+            "name": "rul_monotone",
+            "desc": "预测 RUL 必须非负",
+            "level": "error",
+            "passed": true,
+            "detail": "无",
+            "value": []
+          },
+          {
+            "name": "threshold_monotone",
+            "desc": "漏报成本比上升时告警阈值不得下降",
+            "level": "warn",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: threshold_violations）",
+            "value": null
+          },
+          {
+            "name": "model_selection",
+            "desc": "所选比较模型的 NASA-Score 不得劣于最优值",
+            "level": "warn",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: nasa_gap）",
+            "value": null
+          },
+          {
+            "name": "pipeline_selfcheck",
+            "desc": "预测、原始 RUL 和原始序列必须按机器对齐",
+            "level": "error",
+            "passed": true,
+            "detail": "通过",
+            "value": true
+          }
+        ],
+        "checked": 8,
+        "passed": true,
+        "blocking": [],
+        "warnings": []
+      },
+      "trajectory": [
+        {
+          "turn": 1,
+          "calls": [
+            "maintenance_plan",
+            "fleet_overview"
+          ],
+          "issues": []
+        }
+      ],
+      "turns": 1,
+      "llm_error": null
+    },
+    "cost_scenario": {
+      "domain": "phm",
+      "question": "漏报是误报的10倍，告警阈值怎么选",
+      "status": "ok",
+      "clarification": null,
+      "plan": [
+        {
+          "tool": "cost_threshold",
+          "params": {
+            "c_fn": 10,
+            "c_fp": 1
+          }
+        },
+        {
+          "tool": "uncertainty_audit",
+          "params": {
+            "c_fn": 10,
+            "c_fp": 1
+          }
+        }
+      ],
+      "planner": "rule",
+      "reason": "命中意图 ['threshold']，实体 {'c_fn': 10, 'c_fp': 1}",
+      "scope": {
+        "c_fn": 10,
+        "c_fp": 1
+      },
+      "results": [
+        {
+          "tool": "cost_threshold",
+          "params": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0
+          },
+          "table": [
+            {
+              "告警阈值(循环)": "0.0000",
+              "机队期望代价": "205.8022",
+              "告警机器数": 0
+            },
+            {
+              "告警阈值(循环)": "9.6612",
+              "机队期望代价": "196.8022",
+              "告警机器数": 1
+            },
+            {
+              "告警阈值(循环)": "10.8026",
+              "机队期望代价": "187.8022",
+              "告警机器数": 2
+            },
+            {
+              "告警阈值(循环)": "14.0832",
+              "机队期望代价": "178.8022",
+              "告警机器数": 3
+            },
+            {
+              "告警阈值(循环)": "14.1690",
+              "机队期望代价": "169.8022",
+              "告警机器数": 4
+            },
+            {
+              "告警阈值(循环)": "15.0140",
+              "机队期望代价": "160.8022",
+              "告警机器数": 5
+            },
+            {
+              "告警阈值(循环)": "15.0185",
+              "机队期望代价": "151.8022",
+              "告警机器数": 6
+            },
+            {
+              "告警阈值(循环)": "15.1740",
+              "机队期望代价": "142.8024",
+              "告警机器数": 7
+            },
+            {
+              "告警阈值(循环)": "15.2341",
+              "机队期望代价": "133.8084",
+              "告警机器数": 8
+            },
+            {
+              "告警阈值(循环)": "16.4347",
+              "机队期望代价": "124.8086",
+              "告警机器数": 9
+            },
+            {
+              "告警阈值(循环)": "21.3957",
+              "机队期望代价": "115.8299",
+              "告警机器数": 10
+            },
+            {
+              "告警阈值(循环)": "21.6515",
+              "机队期望代价": "106.8512",
+              "告警机器数": 11
+            },
+            {
+              "告警阈值(循环)": "22.1500",
+              "机队期望代价": "97.9324",
+              "告警机器数": 12
+            },
+            {
+              "告警阈值(循环)": "23.1350",
+              "机队期望代价": "88.9389",
+              "告警机器数": 13
+            },
+            {
+              "告警阈值(循环)": "23.4944",
+              "机队期望代价": "79.9715",
+              "告警机器数": 14
+            },
+            {
+              "告警阈值(循环)": "24.1483",
+              "机队期望代价": "71.5228",
+              "告警机器数": 15
+            },
+            {
+              "告警阈值(循环)": "24.5845",
+              "机队期望代价": "62.5542",
+              "告警机器数": 16
+            },
+            {
+              "告警阈值(循环)": "25.1598",
+              "机队期望代价": "54.5794",
+              "告警机器数": 17
+            },
+            {
+              "告警阈值(循环)": "25.4670",
+              "机队期望代价": "46.3941",
+              "告警机器数": 18
+            },
+            {
+              "告警阈值(循环)": "25.5831",
+              "机队期望代价": "38.2046",
+              "告警机器数": 19
+            },
+            {
+              "告警阈值(循环)": "26.3015",
+              "机队期望代价": "30.9130",
+              "告警机器数": 20
+            },
+            {
+              "告警阈值(循环)": "30.0000",
+              "机队期望代价": "30.9130",
+              "告警机器数": 20
+            },
+            {
+              "告警阈值(循环)": "31.2535",
+              "机队期望代价": "28.5071",
+              "告警机器数": 21
+            },
+            {
+              "告警阈值(循环)": "31.2590",
+              "机队期望代价": "25.6476",
+              "告警机器数": 22
+            },
+            {
+              "告警阈值(循环)": "32.7404",
+              "机队期望代价": "23.7020",
+              "告警机器数": 23
+            },
+            {
+              "告警阈值(循环)": "35.2174",
+              "机队期望代价": "24.1798",
+              "告警机器数": 24
+            },
+            {
+              "告警阈值(循环)": "36.1672",
+              "机队期望代价": "25.1712",
+              "告警机器数": 25
+            },
+            {
+              "告警阈值(循环)": "38.0027",
+              "机队期望代价": "26.1712",
+              "告警机器数": 26
+            },
+            {
+              "告警阈值(循环)": "39.5145",
+              "机队期望代价": "27.0629",
+              "告警机器数": 27
+            },
+            {
+              "告警阈值(循环)": "41.8200",
+              "机队期望代价": "28.0402",
+              "告警机器数": 28
+            },
+            {
+              "告警阈值(循环)": "46.7768",
+              "机队期望代价": "29.0402",
+              "告警机器数": 29
+            },
+            {
+              "告警阈值(循环)": "48.6896",
+              "机队期望代价": "30.0399",
+              "告警机器数": 30
+            },
+            {
+              "告警阈值(循环)": "50.1382",
+              "机队期望代价": "31.0399",
+              "告警机器数": 31
+            },
+            {
+              "告警阈值(循环)": "50.3494",
+              "机队期望代价": "32.0144",
+              "告警机器数": 32
+            },
+            {
+              "告警阈值(循环)": "50.8337",
+              "机队期望代价": "33.0144",
+              "告警机器数": 33
+            },
+            {
+              "告警阈值(循环)": "56.8061",
+              "机队期望代价": "34.0001",
+              "告警机器数": 34
+            },
+            {
+              "告警阈值(循环)": "59.7959",
+              "机队期望代价": "35.0001",
+              "告警机器数": 35
+            },
+            {
+              "告警阈值(循环)": "64.0629",
+              "机队期望代价": "36.0001",
+              "告警机器数": 36
+            },
+            {
+              "告警阈值(循环)": "65.6136",
+              "机队期望代价": "37.0000",
+              "告警机器数": 37
+            },
+            {
+              "告警阈值(循环)": "66.2171",
+              "机队期望代价": "38.0000",
+              "告警机器数": 38
+            },
+            {
+              "告警阈值(循环)": "74.0722",
+              "机队期望代价": "39.0000",
+              "告警机器数": 39
+            },
+            {
+              "告警阈值(循环)": "75.5985",
+              "机队期望代价": "40.0000",
+              "告警机器数": 40
+            },
+            {
+              "告警阈值(循环)": "77.6700",
+              "机队期望代价": "41.0000",
+              "告警机器数": 41
+            },
+            {
+              "告警阈值(循环)": "77.6703",
+              "机队期望代价": "42.0000",
+              "告警机器数": 42
+            },
+            {
+              "告警阈值(循环)": "80.7598",
+              "机队期望代价": "43.0000",
+              "告警机器数": 43
+            },
+            {
+              "告警阈值(循环)": "83.6734",
+              "机队期望代价": "44.0000",
+              "告警机器数": 44
+            },
+            {
+              "告警阈值(循环)": "84.8043",
+              "机队期望代价": "45.0000",
+              "告警机器数": 45
+            },
+            {
+              "告警阈值(循环)": "86.5178",
+              "机队期望代价": "46.0000",
+              "告警机器数": 46
+            },
+            {
+              "告警阈值(循环)": "86.7396",
+              "机队期望代价": "47.0000",
+              "告警机器数": 47
+            },
+            {
+              "告警阈值(循环)": "86.8420",
+              "机队期望代价": "48.0000",
+              "告警机器数": 48
+            },
+            {
+              "告警阈值(循环)": "87.8436",
+              "机队期望代价": "49.0000",
+              "告警机器数": 49
+            },
+            {
+              "告警阈值(循环)": "88.5436",
+              "机队期望代价": "50.0000",
+              "告警机器数": 50
+            },
+            {
+              "告警阈值(循环)": "90.4425",
+              "机队期望代价": "51.0000",
+              "告警机器数": 51
+            },
+            {
+              "告警阈值(循环)": "91.2936",
+              "机队期望代价": "52.0000",
+              "告警机器数": 52
+            },
+            {
+              "告警阈值(循环)": "92.3048",
+              "机队期望代价": "53.0000",
+              "告警机器数": 53
+            },
+            {
+              "告警阈值(循环)": "97.3266",
+              "机队期望代价": "54.0000",
+              "告警机器数": 54
+            },
+            {
+              "告警阈值(循环)": "99.4405",
+              "机队期望代价": "55.0000",
+              "告警机器数": 55
+            },
+            {
+              "告警阈值(循环)": "100.5239",
+              "机队期望代价": "56.0000",
+              "告警机器数": 56
+            },
+            {
+              "告警阈值(循环)": "100.8344",
+              "机队期望代价": "57.0000",
+              "告警机器数": 57
+            },
+            {
+              "告警阈值(循环)": "101.2928",
+              "机队期望代价": "58.0000",
+              "告警机器数": 58
+            },
+            {
+              "告警阈值(循环)": "101.4178",
+              "机队期望代价": "59.0000",
+              "告警机器数": 59
+            },
+            {
+              "告警阈值(循环)": "102.1670",
+              "机队期望代价": "60.0000",
+              "告警机器数": 60
+            },
+            {
+              "告警阈值(循环)": "102.3425",
+              "机队期望代价": "61.0000",
+              "告警机器数": 61
+            },
+            {
+              "告警阈值(循环)": "102.7448",
+              "机队期望代价": "62.0000",
+              "告警机器数": 62
+            },
+            {
+              "告警阈值(循环)": "103.8748",
+              "机队期望代价": "63.0000",
+              "告警机器数": 63
+            },
+            {
+              "告警阈值(循环)": "104.3713",
+              "机队期望代价": "64.0000",
+              "告警机器数": 64
+            },
+            {
+              "告警阈值(循环)": "104.8196",
+              "机队期望代价": "65.0000",
+              "告警机器数": 65
+            },
+            {
+              "告警阈值(循环)": "105.1255",
+              "机队期望代价": "66.0000",
+              "告警机器数": 66
+            },
+            {
+              "告警阈值(循环)": "105.4783",
+              "机队期望代价": "67.0000",
+              "告警机器数": 67
+            },
+            {
+              "告警阈值(循环)": "105.9625",
+              "机队期望代价": "68.0000",
+              "告警机器数": 68
+            },
+            {
+              "告警阈值(循环)": "106.5135",
+              "机队期望代价": "69.0000",
+              "告警机器数": 69
+            },
+            {
+              "告警阈值(循环)": "107.3015",
+              "机队期望代价": "70.0000",
+              "告警机器数": 70
+            },
+            {
+              "告警阈值(循环)": "107.8640",
+              "机队期望代价": "71.0000",
+              "告警机器数": 71
+            },
+            {
+              "告警阈值(循环)": "108.1921",
+              "机队期望代价": "72.0000",
+              "告警机器数": 72
+            },
+            {
+              "告警阈值(循环)": "108.2994",
+              "机队期望代价": "73.0000",
+              "告警机器数": 73
+            },
+            {
+              "告警阈值(循环)": "109.1165",
+              "机队期望代价": "74.0000",
+              "告警机器数": 74
+            },
+            {
+              "告警阈值(循环)": "109.1715",
+              "机队期望代价": "75.0000",
+              "告警机器数": 75
+            },
+            {
+              "告警阈值(循环)": "109.3690",
+              "机队期望代价": "76.0000",
+              "告警机器数": 76
+            },
+            {
+              "告警阈值(循环)": "109.9255",
+              "机队期望代价": "77.0000",
+              "告警机器数": 77
+            },
+            {
+              "告警阈值(循环)": "110.1995",
+              "机队期望代价": "78.0000",
+              "告警机器数": 78
+            },
+            {
+              "告警阈值(循环)": "110.3010",
+              "机队期望代价": "79.0000",
+              "告警机器数": 79
+            },
+            {
+              "告警阈值(循环)": "110.4110",
+              "机队期望代价": "80.0000",
+              "告警机器数": 80
+            },
+            {
+              "告警阈值(循环)": "110.6456",
+              "机队期望代价": "81.0000",
+              "告警机器数": 81
+            },
+            {
+              "告警阈值(循环)": "110.8187",
+              "机队期望代价": "82.0000",
+              "告警机器数": 82
+            },
+            {
+              "告警阈值(循环)": "111.6119",
+              "机队期望代价": "83.0000",
+              "告警机器数": 83
+            },
+            {
+              "告警阈值(循环)": "112.4470",
+              "机队期望代价": "84.0000",
+              "告警机器数": 84
+            },
+            {
+              "告警阈值(循环)": "112.8736",
+              "机队期望代价": "85.0000",
+              "告警机器数": 85
+            },
+            {
+              "告警阈值(循环)": "113.8650",
+              "机队期望代价": "86.0000",
+              "告警机器数": 86
+            },
+            {
+              "告警阈值(循环)": "113.9137",
+              "机队期望代价": "87.0000",
+              "告警机器数": 87
+            },
+            {
+              "告警阈值(循环)": "114.0205",
+              "机队期望代价": "88.0000",
+              "告警机器数": 88
+            },
+            {
+              "告警阈值(循环)": "115.2346",
+              "机队期望代价": "89.0000",
+              "告警机器数": 89
+            },
+            {
+              "告警阈值(循环)": "116.3663",
+              "机队期望代价": "90.0000",
+              "告警机器数": 90
+            },
+            {
+              "告警阈值(循环)": "116.6347",
+              "机队期望代价": "91.0000",
+              "告警机器数": 91
+            },
+            {
+              "告警阈值(循环)": "116.7971",
+              "机队期望代价": "92.0000",
+              "告警机器数": 92
+            },
+            {
+              "告警阈值(循环)": "117.2370",
+              "机队期望代价": "93.0000",
+              "告警机器数": 93
+            },
+            {
+              "告警阈值(循环)": "117.7163",
+              "机队期望代价": "94.0000",
+              "告警机器数": 94
+            },
+            {
+              "告警阈值(循环)": "118.3798",
+              "机队期望代价": "95.0000",
+              "告警机器数": 95
+            },
+            {
+              "告警阈值(循环)": "118.4351",
+              "机队期望代价": "96.0000",
+              "告警机器数": 96
+            },
+            {
+              "告警阈值(循环)": "119.4506",
+              "机队期望代价": "97.0000",
+              "告警机器数": 97
+            },
+            {
+              "告警阈值(循环)": "120.5091",
+              "机队期望代价": "98.0000",
+              "告警机器数": 98
+            },
+            {
+              "告警阈值(循环)": "121.8874",
+              "机队期望代价": "99.0000",
+              "告警机器数": 99
+            },
+            {
+              "告警阈值(循环)": "122.4820",
+              "机队期望代价": "100.0000",
+              "告警机器数": 100
+            },
+            {
+              "告警阈值(循环)": "123.4820",
+              "机队期望代价": "100.0000",
+              "告警机器数": 100
+            }
+          ],
+          "facts": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0,
+            "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "bad_units": [],
+            "pipeline_ok": true,
+            "u_count": 100,
+            "y_count": 100,
+            "rul_count": 100,
+            "panel_unit_count": 100,
+            "alignment_checked": true,
+            "labels_match": true,
+            "end_cycles_match": true,
+            "unit_alignment_ok": true,
+            "threshold_rul": 32.740421295166016,
+            "expected_cost": 23.701981999417526,
+            "default_cost": 30.91298415925574,
+            "compare_to_default": 7.211002159838213,
+            "n_alarms": 23,
+            "default_threshold": 30,
+            "threshold_violations": [],
+            "empirical_coverage": 0.56,
+            "usable_for_decision": false
+          },
+          "note": "这是期望代价近似：RUL ~ N(μ,σ)，固定风险事件 RUL < H，alarm_i(t)=1[μ_i≤t]；总成本 Σ(C_fn·P(RUL_i<H)·(1−alarm_i)+C_fp·alarm_i)。仅搜索告警线，避免阈值和风险事件同时变化导致零阈值退化。C_fp 在此近似中作为每次告警成本支付，包含真告警。compare_to_default 为默认30循环成本减最优成本；σ 未校准时仅作情景分析，不准入。",
+          "insufficient": false,
+          "curves": {
+            "threshold": [
+              {
+                "threshold_rul": 0.0,
+                "expected_cost": 205.80218777478947,
+                "n_alarms": 0
+              },
+              {
+                "threshold_rul": 9.66119384765625,
+                "expected_cost": 196.802188141417,
+                "n_alarms": 1
+              },
+              {
+                "threshold_rul": 10.802578926086426,
+                "expected_cost": 187.8021881652013,
+                "n_alarms": 2
+              },
+              {
+                "threshold_rul": 14.083186149597168,
+                "expected_cost": 178.80218843924428,
+                "n_alarms": 3
+              },
+              {
+                "threshold_rul": 14.169036865234375,
+                "expected_cost": 169.80219009851803,
+                "n_alarms": 4
+              },
+              {
+                "threshold_rul": 15.013982772827148,
+                "expected_cost": 160.8022103517552,
+                "n_alarms": 5
+              },
+              {
+                "threshold_rul": 15.018457412719727,
+                "expected_cost": 151.8022133555002,
+                "n_alarms": 6
+              },
+              {
+                "threshold_rul": 15.174041748046875,
+                "expected_cost": 142.8024102253679,
+                "n_alarms": 7
+              },
+              {
+                "threshold_rul": 15.234106063842773,
+                "expected_cost": 133.80843852334522,
+                "n_alarms": 8
+              },
+              {
+                "threshold_rul": 16.434661865234375,
+                "expected_cost": 124.80860517379935,
+                "n_alarms": 9
+              },
+              {
+                "threshold_rul": 21.395654678344727,
+                "expected_cost": 115.8299327238194,
+                "n_alarms": 10
+              },
+              {
+                "threshold_rul": 21.651487350463867,
+                "expected_cost": 106.85117833287416,
+                "n_alarms": 11
+              },
+              {
+                "threshold_rul": 22.150020599365234,
+                "expected_cost": 97.93241709235735,
+                "n_alarms": 12
+              },
+              {
+                "threshold_rul": 23.134965896606445,
+                "expected_cost": 88.9388964283883,
+                "n_alarms": 13
+              },
+              {
+                "threshold_rul": 23.4943904876709,
+                "expected_cost": 79.9714628248845,
+                "n_alarms": 14
+              },
+              {
+                "threshold_rul": 24.148303985595703,
+                "expected_cost": 71.52279665527416,
+                "n_alarms": 15
+              },
+              {
+                "threshold_rul": 24.584453582763672,
+                "expected_cost": 62.554165842986215,
+                "n_alarms": 16
+              },
+              {
+                "threshold_rul": 25.159753799438477,
+                "expected_cost": 54.57943731235754,
+                "n_alarms": 17
+              },
+              {
+                "threshold_rul": 25.46698570251465,
+                "expected_cost": 46.39411341225613,
+                "n_alarms": 18
+              },
+              {
+                "threshold_rul": 25.58311653137207,
+                "expected_cost": 38.204627921936805,
+                "n_alarms": 19
+              },
+              {
+                "threshold_rul": 26.30146598815918,
+                "expected_cost": 30.91298415925574,
+                "n_alarms": 20
+              },
+              {
+                "threshold_rul": 30.0,
+                "expected_cost": 30.91298415925574,
+                "n_alarms": 20
+              },
+              {
+                "threshold_rul": 31.253507614135742,
+                "expected_cost": 28.507116024211278,
+                "n_alarms": 21
+              },
+              {
+                "threshold_rul": 31.259033203125,
+                "expected_cost": 25.647606911870263,
+                "n_alarms": 22
+              },
+              {
+                "threshold_rul": 32.740421295166016,
+                "expected_cost": 23.701981999417526,
+                "n_alarms": 23
+              },
+              {
+                "threshold_rul": 35.217369079589844,
+                "expected_cost": 24.179803995021633,
+                "n_alarms": 24
+              },
+              {
+                "threshold_rul": 36.16718292236328,
+                "expected_cost": 25.171243180773853,
+                "n_alarms": 25
+              },
+              {
+                "threshold_rul": 38.002681732177734,
+                "expected_cost": 26.171221642522372,
+                "n_alarms": 26
+              },
+              {
+                "threshold_rul": 39.51445770263672,
+                "expected_cost": 27.062917676010546,
+                "n_alarms": 27
+              },
+              {
+                "threshold_rul": 41.82002639770508,
+                "expected_cost": 28.040165760665197,
+                "n_alarms": 28
+              },
+              {
+                "threshold_rul": 46.776756286621094,
+                "expected_cost": 29.04016327871097,
+                "n_alarms": 29
+              },
+              {
+                "threshold_rul": 48.68956756591797,
+                "expected_cost": 30.03993264745247,
+                "n_alarms": 30
+              },
+              {
+                "threshold_rul": 50.1381721496582,
+                "expected_cost": 31.03993264745247,
+                "n_alarms": 31
+              },
+              {
+                "threshold_rul": 50.34941101074219,
+                "expected_cost": 32.01443294598622,
+                "n_alarms": 32
+              },
+              {
+                "threshold_rul": 50.833740234375,
+                "expected_cost": 33.01443294598128,
+                "n_alarms": 33
+              },
+              {
+                "threshold_rul": 56.806129455566406,
+                "expected_cost": 34.00006360877557,
+                "n_alarms": 34
+              },
+              {
+                "threshold_rul": 59.79591369628906,
+                "expected_cost": 35.000063608210674,
+                "n_alarms": 35
+              },
+              {
+                "threshold_rul": 64.06290435791016,
+                "expected_cost": 36.00006314165136,
+                "n_alarms": 36
+              },
+              {
+                "threshold_rul": 65.61357879638672,
+                "expected_cost": 37.00001882735467,
+                "n_alarms": 37
+              },
+              {
+                "threshold_rul": 66.2171401977539,
+                "expected_cost": 38.00001880161181,
+                "n_alarms": 38
+              },
+              {
+                "threshold_rul": 74.07218170166016,
+                "expected_cost": 39.00000297553092,
+                "n_alarms": 39
+              },
+              {
+                "threshold_rul": 75.59846496582031,
+                "expected_cost": 40.000002975442776,
+                "n_alarms": 40
+              },
+              {
+                "threshold_rul": 77.67000579833984,
+                "expected_cost": 41.000002975137,
+                "n_alarms": 41
+              },
+              {
+                "threshold_rul": 77.6702651977539,
+                "expected_cost": 42.00000297513661,
+                "n_alarms": 42
+              },
+              {
+                "threshold_rul": 80.75983428955078,
+                "expected_cost": 43.000002967306585,
+                "n_alarms": 43
+              },
+              {
+                "threshold_rul": 83.67339324951172,
+                "expected_cost": 44.00000292305094,
+                "n_alarms": 44
+              },
+              {
+                "threshold_rul": 84.80430603027344,
+                "expected_cost": 45.00000291855551,
+                "n_alarms": 45
+              },
+              {
+                "threshold_rul": 86.517822265625,
+                "expected_cost": 46.00000091299958,
+                "n_alarms": 46
+              },
+              {
+                "threshold_rul": 86.73963165283203,
+                "expected_cost": 47.00000091299958,
+                "n_alarms": 47
+              },
+              {
+                "threshold_rul": 86.84196472167969,
+                "expected_cost": 48.000000125845176,
+                "n_alarms": 48
+              },
+              {
+                "threshold_rul": 87.84357452392578,
+                "expected_cost": 49.0000001257775,
+                "n_alarms": 49
+              },
+              {
+                "threshold_rul": 88.5436019897461,
+                "expected_cost": 50.000000123444394,
+                "n_alarms": 50
+              },
+              {
+                "threshold_rul": 90.44248962402344,
+                "expected_cost": 51.000000123444394,
+                "n_alarms": 51
+              },
+              {
+                "threshold_rul": 91.29357147216797,
+                "expected_cost": 52.00000000129455,
+                "n_alarms": 52
+              },
+              {
+                "threshold_rul": 92.30477905273438,
+                "expected_cost": 53.00000000128947,
+                "n_alarms": 53
+              },
+              {
+                "threshold_rul": 97.32662963867188,
+                "expected_cost": 54.00000000128947,
+                "n_alarms": 54
+              },
+              {
+                "threshold_rul": 99.44052124023438,
+                "expected_cost": 55.00000000128947,
+                "n_alarms": 55
+              },
+              {
+                "threshold_rul": 100.5239486694336,
+                "expected_cost": 56.00000000128873,
+                "n_alarms": 56
+              },
+              {
+                "threshold_rul": 100.83440399169922,
+                "expected_cost": 57.00000000128873,
+                "n_alarms": 57
+              },
+              {
+                "threshold_rul": 101.29277038574219,
+                "expected_cost": 58.00000000128873,
+                "n_alarms": 58
+              },
+              {
+                "threshold_rul": 101.4178237915039,
+                "expected_cost": 59.00000000000369,
+                "n_alarms": 59
+              },
+              {
+                "threshold_rul": 102.16696166992188,
+                "expected_cost": 60.00000000000369,
+                "n_alarms": 60
+              },
+              {
+                "threshold_rul": 102.34252166748047,
+                "expected_cost": 61.00000000000369,
+                "n_alarms": 61
+              },
+              {
+                "threshold_rul": 102.74481964111328,
+                "expected_cost": 62.00000000000369,
+                "n_alarms": 62
+              },
+              {
+                "threshold_rul": 103.87479400634766,
+                "expected_cost": 63.00000000000369,
+                "n_alarms": 63
+              },
+              {
+                "threshold_rul": 104.37125396728516,
+                "expected_cost": 64.00000000000368,
+                "n_alarms": 64
+              },
+              {
+                "threshold_rul": 104.81956481933594,
+                "expected_cost": 65.00000000000368,
+                "n_alarms": 65
+              },
+              {
+                "threshold_rul": 105.12548065185547,
+                "expected_cost": 66.00000000000368,
+                "n_alarms": 66
+              },
+              {
+                "threshold_rul": 105.4782943725586,
+                "expected_cost": 67.00000000000368,
+                "n_alarms": 67
+              },
+              {
+                "threshold_rul": 105.96253967285156,
+                "expected_cost": 68.00000000000368,
+                "n_alarms": 68
+              },
+              {
+                "threshold_rul": 106.51354217529297,
+                "expected_cost": 69.00000000000368,
+                "n_alarms": 69
+              },
+              {
+                "threshold_rul": 107.301513671875,
+                "expected_cost": 70.00000000000368,
+                "n_alarms": 70
+              },
+              {
+                "threshold_rul": 107.86397552490234,
+                "expected_cost": 71.00000000000368,
+                "n_alarms": 71
+              },
+              {
+                "threshold_rul": 108.192138671875,
+                "expected_cost": 72.00000000000368,
+                "n_alarms": 72
+              },
+              {
+                "threshold_rul": 108.29942321777344,
+                "expected_cost": 73.00000000000368,
+                "n_alarms": 73
+              },
+              {
+                "threshold_rul": 109.11649322509766,
+                "expected_cost": 74.0,
+                "n_alarms": 74
+              },
+              {
+                "threshold_rul": 109.17146301269531,
+                "expected_cost": 75.0,
+                "n_alarms": 75
+              },
+              {
+                "threshold_rul": 109.3689956665039,
+                "expected_cost": 76.0,
+                "n_alarms": 76
+              },
+              {
+                "threshold_rul": 109.925537109375,
+                "expected_cost": 77.0,
+                "n_alarms": 77
+              },
+              {
+                "threshold_rul": 110.19954681396484,
+                "expected_cost": 78.0,
+                "n_alarms": 78
+              },
+              {
+                "threshold_rul": 110.30099487304688,
+                "expected_cost": 79.0,
+                "n_alarms": 79
+              },
+              {
+                "threshold_rul": 110.41104125976562,
+                "expected_cost": 80.0,
+                "n_alarms": 80
+              },
+              {
+                "threshold_rul": 110.64563751220703,
+                "expected_cost": 81.0,
+                "n_alarms": 81
+              },
+              {
+                "threshold_rul": 110.8187484741211,
+                "expected_cost": 82.0,
+                "n_alarms": 82
+              },
+              {
+                "threshold_rul": 111.61192321777344,
+                "expected_cost": 83.0,
+                "n_alarms": 83
+              },
+              {
+                "threshold_rul": 112.44697570800781,
+                "expected_cost": 84.0,
+                "n_alarms": 84
+              },
+              {
+                "threshold_rul": 112.87356567382812,
+                "expected_cost": 85.0,
+                "n_alarms": 85
+              },
+              {
+                "threshold_rul": 113.8650131225586,
+                "expected_cost": 86.0,
+                "n_alarms": 86
+              },
+              {
+                "threshold_rul": 113.91365051269531,
+                "expected_cost": 87.0,
+                "n_alarms": 87
+              },
+              {
+                "threshold_rul": 114.02050018310547,
+                "expected_cost": 88.0,
+                "n_alarms": 88
+              },
+              {
+                "threshold_rul": 115.23458099365234,
+                "expected_cost": 89.0,
+                "n_alarms": 89
+              },
+              {
+                "threshold_rul": 116.36625671386719,
+                "expected_cost": 90.0,
+                "n_alarms": 90
+              },
+              {
+                "threshold_rul": 116.6347427368164,
+                "expected_cost": 91.0,
+                "n_alarms": 91
+              },
+              {
+                "threshold_rul": 116.79710388183594,
+                "expected_cost": 92.0,
+                "n_alarms": 92
+              },
+              {
+                "threshold_rul": 117.23697662353516,
+                "expected_cost": 93.0,
+                "n_alarms": 93
+              },
+              {
+                "threshold_rul": 117.71630096435547,
+                "expected_cost": 94.0,
+                "n_alarms": 94
+              },
+              {
+                "threshold_rul": 118.37975311279297,
+                "expected_cost": 95.0,
+                "n_alarms": 95
+              },
+              {
+                "threshold_rul": 118.43512725830078,
+                "expected_cost": 96.0,
+                "n_alarms": 96
+              },
+              {
+                "threshold_rul": 119.4505615234375,
+                "expected_cost": 97.0,
+                "n_alarms": 97
+              },
+              {
+                "threshold_rul": 120.50906372070312,
+                "expected_cost": 98.0,
+                "n_alarms": 98
+              },
+              {
+                "threshold_rul": 121.88735961914062,
+                "expected_cost": 99.0,
+                "n_alarms": 99
+              },
+              {
+                "threshold_rul": 122.48196411132812,
+                "expected_cost": 100.0,
+                "n_alarms": 100
+              },
+              {
+                "threshold_rul": 123.48196411132812,
+                "expected_cost": 100.0,
+                "n_alarms": 100
+              }
+            ],
+            "cost_ratio": [
+              {
+                "cost_ratio": 0.5,
+                "threshold_rul": 0.0
+              },
+              {
+                "cost_ratio": 1.0,
+                "threshold_rul": 0.0
+              },
+              {
+                "cost_ratio": 2.0,
+                "threshold_rul": 26.30146598815918
+              },
+              {
+                "cost_ratio": 5.0,
+                "threshold_rul": 32.740421295166016
+              },
+              {
+                "cost_ratio": 10.0,
+                "threshold_rul": 32.740421295166016
+              },
+              {
+                "cost_ratio": 20.0,
+                "threshold_rul": 35.217369079589844
+              },
+              {
+                "cost_ratio": 50.0,
+                "threshold_rul": 35.217369079589844
+              },
+              {
+                "cost_ratio": 100.0,
+                "threshold_rul": 35.217369079589844
+              }
+            ]
+          }
+        },
+        {
+          "tool": "uncertainty_audit",
+          "params": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0
+          },
+          "table": [
+            {
+              "名义覆盖率": "95%",
+              "实测覆盖率": "56.00%",
+              "缺口(百分点)": "39.00",
+              "平均标准差(循环)": "5.22",
+              "准入覆盖率": "85%",
+              "覆盖率准入": "阻断"
+            }
+          ],
+          "facts": {
+            "dataset": "FD001",
+            "c_fn": 10.0,
+            "c_fp": 1.0,
+            "lead_time_days": 14.0,
+            "window_days": 14.0,
+            "cycles_per_day": 1.0,
+            "risk_horizon_cycles": 30.0,
+            "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "bad_units": [],
+            "pipeline_ok": true,
+            "u_count": 100,
+            "y_count": 100,
+            "rul_count": 100,
+            "panel_unit_count": 100,
+            "alignment_checked": true,
+            "labels_match": true,
+            "end_cycles_match": true,
+            "unit_alignment_ok": true,
+            "n": 100,
+            "nominal": 0.95,
+            "empirical_coverage": 0.56,
+            "gap_pt": 38.99999999999999,
+            "mean_sigma": 5.223652765750885,
+            "min_coverage": 0.85,
+            "usable_for_decision": false
+          },
+          "note": "带标签仿真测试集复算 pred ± 1.96σ 闭区间覆盖率；回顾性审计不是在线故障概率。",
+          "insufficient": false
+        }
+      ],
+      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final。RUL 单位为运行循环数。\n\n### 事实\n- 固定风险时间窗 30 循环，期望代价近似最优告警线为 32.7404 循环，触发 23 台告警。[T1]\n- 机队总期望代价 23.7020，默认 30 循环告警线的代价 30.9130，降低 7.2110 假设成本单位；这是未校准正态分布下的情景分析，不准入实际决策。[T1]\n- 名义覆盖率 95%，实测覆盖率 **56%**，缺口 39.00 个百分点；准入线 85%。[T2]\n- 预测标准差均值 5.22 循环；覆盖率准入未通过。[T2]\n\n### 结论\n1. 不能用这个预测区间安排停机检修：覆盖率未达到准入线，coverage_gate 阻断。应先使用独立校准集开展共形预测校准，并重新验证覆盖率。[T2]\n2. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n3. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
+      "composer": "template",
+      "grounding": {
+        "checked": 16,
+        "supported": 16,
+        "unsupported": [],
+        "skipped_structural": 6,
+        "rate": 1.0,
+        "passed": true,
+        "citations": [
+          1,
+          2
+        ],
+        "cite_ok": true,
+        "pool_size": 363
+      },
+      "gates": {
+        "results": [
+          {
+            "name": "numeric_trace",
+            "desc": "答案中所有数字必须可追溯到工具输出",
+            "level": "error",
+            "passed": true,
+            "detail": "16/16 可追溯",
+            "value": 1.0
+          },
+          {
+            "name": "tool_health",
+            "desc": "所有工具调用必须成功",
+            "level": "error",
+            "passed": true,
+            "detail": "全部成功",
+            "value": null
+          },
+          {
+            "name": "coverage_gate",
+            "desc": "区间实测覆盖率须达到准入线",
+            "level": "error",
+            "passed": false,
+            "detail": "区间覆盖率未达到准入线，禁止用该区间安排停机检修",
+            "value": 0.56
+          },
+          {
+            "name": "lead_time_gate",
+            "desc": "维护候选必须等得到备件",
+            "level": "error",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: n_missed）",
+            "value": null
+          },
+          {
+            "name": "rul_monotone",
+            "desc": "预测 RUL 必须非负",
+            "level": "error",
+            "passed": true,
+            "detail": "无",
+            "value": []
+          },
+          {
+            "name": "threshold_monotone",
+            "desc": "漏报成本比上升时告警阈值不得下降",
+            "level": "warn",
+            "passed": true,
+            "detail": "无",
+            "value": []
+          },
+          {
+            "name": "model_selection",
+            "desc": "所选比较模型的 NASA-Score 不得劣于最优值",
+            "level": "warn",
+            "passed": true,
+            "detail": "本轮未产出该指标，跳过（缺 fact: nasa_gap）",
+            "value": null
+          },
+          {
+            "name": "pipeline_selfcheck",
+            "desc": "预测、原始 RUL 和原始序列必须按机器对齐",
+            "level": "error",
+            "passed": true,
+            "detail": "通过",
+            "value": true
+          }
+        ],
+        "checked": 8,
+        "passed": false,
+        "blocking": [
+          {
+            "name": "coverage_gate",
+            "desc": "区间实测覆盖率须达到准入线",
+            "level": "error",
+            "passed": false,
+            "detail": "区间覆盖率未达到准入线，禁止用该区间安排停机检修",
+            "value": 0.56
+          }
+        ],
+        "warnings": []
+      },
+      "trajectory": [
+        {
+          "turn": 1,
+          "calls": [
+            "cost_threshold",
+            "uncertainty_audit"
+          ],
+          "issues": []
+        }
+      ],
+      "turns": 1,
+      "llm_error": null
+    }
+  }
+}

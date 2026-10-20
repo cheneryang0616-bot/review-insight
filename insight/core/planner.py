@@ -64,7 +64,7 @@ def _pick_sequence(intents: List[str], spec: PlanSpec) -> List[str]:
 def _inherit(ent: dict, q: str, prev: dict, spec: PlanSpec) -> dict:
     prev = dict(prev or {})
     for k in spec.scope_keys:
-        if k not in ent and prev.get(k) and any(a in q for a in spec.anaphora):
+        if k not in ent and k in prev and prev[k] is not None and any(a in q for a in spec.anaphora):
             ent[k] = prev[k]
     return ent
 

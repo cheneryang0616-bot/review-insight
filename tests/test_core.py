@@ -151,6 +151,15 @@ class TestPlanner(unittest.TestCase):
                               self._reg(), prev_scope={"feature": "b"})
         self.assertNotIn("feature", r["entities"])
 
+    def test_followup_preserves_zero_values_and_skips_none(self):
+        spec = self._spec()
+        spec.scope_keys = ("lead_time_days", "c_fn", "feature")
+        r = planner.rule_plan("那这个变量的效果怎么样", self.FakeDF(), spec, self._reg(),
+                              prev_scope={"lead_time_days": 0, "c_fn": 0, "feature": None})
+        self.assertEqual(r["entities"]["lead_time_days"], 0)
+        self.assertEqual(r["entities"]["c_fn"], 0)
+        self.assertNotIn("feature", r["entities"])
+
     def test_tuple_entry_injects_params(self):
         reg = Registry("x")
         reg.tool("perf_metrics", "指标", {"exclude_forbidden": "0/1"})(

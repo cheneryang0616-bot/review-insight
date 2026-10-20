@@ -1,48 +1,352 @@
 {
- "domain": "phm",
- "mode": "离线",
- "dataset": "FD001",
- "total": 1,
- "passed": 1,
- "skipped": [],
- "cases": [
-  {
-   "id": "phm_phase0_shutdown",
-   "question": "能不能用这个预测区间安排停机检修？",
-   "passed": true,
-   "tools": [
-    "uncertainty_audit",
-    "fleet_overview"
-   ],
-   "composer": "template",
-   "grounding_rate": 1.0,
-   "checks": [
+  "domain": "phm",
+  "mode": "离线",
+  "dataset": "FD001",
+  "total": 9,
+  "passed": 9,
+  "skipped": [],
+  "cases": [
     {
-     "name": "tools",
-     "passed": true,
-     "detail": "OK"
+      "id": "phm_phase0_shutdown",
+      "question": "能不能用这个预测区间安排停机检修？",
+      "passed": true,
+      "tools": [
+        "uncertainty_audit",
+        "fleet_overview"
+      ],
+      "composer": "template",
+      "grounding_rate": 1.0,
+      "checks": [
+        {
+          "name": "tools",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "facts",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "gates",
+          "passed": true,
+          "detail": "阻断项 ['coverage_gate']，期望含 ['coverage_gate']"
+        }
+      ]
     },
     {
-     "name": "facts",
-     "passed": true,
-     "detail": "OK"
+      "id": "phm_fleet",
+      "question": "机队总览",
+      "passed": true,
+      "tools": [
+        "fleet_overview",
+        "uncertainty_audit"
+      ],
+      "composer": "template",
+      "grounding_rate": 1.0,
+      "checks": [
+        {
+          "name": "tools",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "facts",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "gates",
+          "passed": true,
+          "detail": "阻断项 ['coverage_gate']，期望含 ['coverage_gate']"
+        }
+      ]
     },
     {
-     "name": "scope",
-     "passed": true,
-     "detail": "OK"
+      "id": "phm_unit",
+      "question": "机器34健康如何",
+      "passed": true,
+      "tools": [
+        "unit_health",
+        "degradation_rate"
+      ],
+      "composer": "template",
+      "grounding_rate": 1.0,
+      "checks": [
+        {
+          "name": "tools",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "facts",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "gates",
+          "passed": true,
+          "detail": "OK"
+        }
+      ]
     },
     {
-     "name": "grounding",
-     "passed": true,
-     "detail": "OK"
+      "id": "phm_why",
+      "question": "机器34为什么退化，哪个传感器贡献最高",
+      "passed": true,
+      "tools": [
+        "sensor_attribution",
+        "unit_health"
+      ],
+      "composer": "template",
+      "grounding_rate": 1.0,
+      "checks": [
+        {
+          "name": "tools",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "facts",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "gates",
+          "passed": true,
+          "detail": "OK"
+        }
+      ]
     },
     {
-     "name": "gates",
-     "passed": true,
-     "detail": "阻断项 ['coverage_gate']，期望含 ['coverage_gate']"
+      "id": "phm_threshold",
+      "question": "漏报是误报的10倍，告警阈值怎么选",
+      "passed": true,
+      "tools": [
+        "cost_threshold",
+        "uncertainty_audit"
+      ],
+      "composer": "template",
+      "grounding_rate": 1.0,
+      "checks": [
+        {
+          "name": "tools",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "facts",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "gates",
+          "passed": true,
+          "detail": "阻断项 ['coverage_gate']，期望含 ['coverage_gate']"
+        }
+      ]
+    },
+    {
+      "id": "phm_plan_block",
+      "question": "哪几台两周内必须修",
+      "passed": true,
+      "tools": [
+        "maintenance_plan",
+        "fleet_overview"
+      ],
+      "composer": "template",
+      "grounding_rate": 1.0,
+      "checks": [
+        {
+          "name": "tools",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "facts",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "gates",
+          "passed": true,
+          "detail": "阻断项 ['lead_time_gate']，期望含 ['lead_time_gate']"
+        }
+      ]
+    },
+    {
+      "id": "phm_plan_pass",
+      "question": "哪几台两周内必须修，备件7天到",
+      "passed": true,
+      "tools": [
+        "maintenance_plan",
+        "fleet_overview"
+      ],
+      "composer": "template",
+      "grounding_rate": 1.0,
+      "checks": [
+        {
+          "name": "tools",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "facts",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "gates",
+          "passed": true,
+          "detail": "OK"
+        }
+      ]
+    },
+    {
+      "id": "phm_model",
+      "question": "哪个模型更好",
+      "passed": true,
+      "tools": [
+        "model_compare",
+        "fleet_overview"
+      ],
+      "composer": "template",
+      "grounding_rate": 1.0,
+      "checks": [
+        {
+          "name": "tools",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "facts",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "gates",
+          "passed": true,
+          "detail": "OK"
+        }
+      ]
+    },
+    {
+      "id": "phm_model_chosen",
+      "question": "模型对比，选用GBDT",
+      "passed": true,
+      "tools": [
+        "model_compare",
+        "fleet_overview"
+      ],
+      "composer": "template",
+      "grounding_rate": 1.0,
+      "checks": [
+        {
+          "name": "tools",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "facts",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "scope",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "detail": "OK"
+        },
+        {
+          "name": "gates",
+          "passed": true,
+          "detail": "OK"
+        }
+      ]
     }
-   ]
-  }
- ]
+  ]
 }

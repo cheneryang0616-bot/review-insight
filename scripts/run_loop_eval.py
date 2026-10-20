@@ -53,6 +53,15 @@ CASES = {
          "expect_status": "ok", "expect_tools": ["score_scale"],
          "why": "正常问题不该被误判"},
     ],
+    "phm": [
+        {"id": "P-L1", "question": "这台还能飞多久",
+         "expect_status": "clarification", "why": "单机健康缺 unit，应反问并列出机器范围"},
+        {"id": "P-L2", "question": "请帮我分析明天的股票行情",
+         "expect_status": "clarification", "why": "领域外意图应返回 PHM 能力清单"},
+        {"id": "P-L3", "question": "机器1的健康如何",
+         "expect_status": "degraded", "expect_tools": ["unit_health", "degradation_rate"],
+         "why": "FD001机器1仅31循环，不足两诊断窗口；样例模式也无原始序列，均应诚实降级"},
+    ],
 }
 
 

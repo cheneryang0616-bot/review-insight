@@ -121,9 +121,9 @@ class TestPHMToolsAndGates(unittest.TestCase):
         self.assertEqual(facts["worst_unit"], 1)
 
     def test_coverage_uses_closed_interval_and_actual_labels(self):
-        df = pd.DataFrame({
-            "pred": [0., 10., 20.], "y_true": [1.96, 11.96001, 17.], "sigma": [1., 1., 2.],
-        })
+        df = data.load_sample().iloc[:3].copy()
+        df["pred"], df["y_true"], df["sigma"] = (
+            [0., 10., 20.], [1.96, 11.96001, 17.], [1., 1., 2.])
         result = tools.uncertainty_audit(df)
         self.assertAlmostEqual(result["facts"]["empirical_coverage"], 2 / 3)
         self.assertFalse(result["facts"]["usable_for_decision"])
@@ -157,7 +157,9 @@ class TestPHMToolsAndGates(unittest.TestCase):
         df = data.load_sample().iloc[:20].copy()
         df["y_true"] = df["pred"]
         df.loc[df.index[:3], "y_true"] = df.loc[df.index[:3], "pred"] + 10000
-        audit = tools.uncertainty_audit(df)
+        # 本测试单独验证覆盖率边界，管道对齐由 stage1 数据测试验证。
+        with patch.object(data, "pipeline_check", return_value={"pipeline_ok": True}):
+            audit = tools.uncertainty_audit(df)
         self.assertEqual(audit["facts"]["empirical_coverage"], 0.85)
         self.assertTrue(audit["facts"]["usable_for_decision"])
         self.assertTrue(gates.run_all(GATES, {"results": [audit]})["passed"])
@@ -182,7 +184,8 @@ class TestPHMPhaseZero(unittest.TestCase):
         self.assertTrue(grounding.check("实测覆盖率为 56%。", [audit])["passed"])
         self.assertFalse(grounding.check("实测覆盖率为 77.77%。", [audit])["passed"])
         self.assertFalse(result["gates"]["passed"])
-        self.assertEqual([r["name"] for r in result["gates"]["blocking"]], ["coverage_gate"])
+        self.assertEqual({r["name"] for r in result["gates"]["blocking"]},
+                         {"coverage_gate", "pipeline_selfcheck"})
         self.assertIn("不能用这个预测区间安排停机检修", result["answer"])
         self.assertNotRegex(result["answer"], r"(可以|能够|可据此|建议立即).{0,12}停机")
         self.assertIn("成本与提前期假设", result["answer"])
@@ -195,16 +198,18 @@ class TestPHMPhaseZero(unittest.TestCase):
         self.assertTrue(result["grounding"]["passed"])
         self.assertFalse(result["gates"]["passed"])
 
-    def test_unknown_intent_returns_phase_zero_capabilities(self):
+    def test_unknown_intent_returns_current_capabilities(self):
         result = sample_agent().ask("请帮我分析明天的股票行情", use_llm=False)
         self.assertEqual(result["status"], "clarification")
         self.assertEqual(result["results"], [])
-        self.assertIn("Phase 0", result["answer"])
+        self.assertIn("机队 RUL 总览", result["answer"])
+        self.assertIn("维护候选排期", result["answer"])
 
     def test_passed_coverage_still_does_not_authorize_shutdown(self):
         agent = sample_agent()
         agent.df["y_true"] = agent.df["pred"]
-        result = agent.ask("这个区间可信么？", use_llm=False)
+        with patch.object(data, "pipeline_check", return_value={"pipeline_ok": True}):
+            result = agent.ask("这个区间可信么？", use_llm=False)
         self.assertTrue(result["gates"]["passed"])
         self.assertTrue(result["grounding"]["passed"])
         self.assertIn("本阶段不生成停机安排", result["answer"])

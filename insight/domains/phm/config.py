@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""PHM Phase 0：预测来源、区间口径与显式假设。"""
+"""PHM：预测来源、决策口径与可覆盖的示意假设。"""
 from pathlib import Path
 
 DEFAULT_ROOT = Path("/Users/zhuan/c-mapss_train")
@@ -14,7 +14,15 @@ MIN_COVERAGE = NOMINAL - COVERAGE_TOLERANCE
 SERVICE_NEAR = 30
 SERVICE_MID = 60
 
-# 示意值；Phase 0 不执行成本优化或排期，也不把循环数换算成天。
+# 示意值，绝非真实产线参数；工具必须随结果披露。
 C_FN = 10.0
 C_FP = 1.0
 LEAD_TIME_DAYS = 14
+WINDOW_DAYS = 14
+CYCLES_PER_DAY = 1.0
+RISK_HORIZON_CYCLES = 30.0
+DIAGNOSTIC_WINDOW = 30
+SMOOTHING_WINDOW = 5
+HEALTH_SENSORS = ("sensor_2", "sensor_7", "sensor_11", "sensor_12", "sensor_15")
+ACCELERATION_MARGIN = 0.20
+CHOSEN_MODEL = "cnn_bilstm_attn"

@@ -1,116 +1,152 @@
 {
- "total": 9,
- "passed": 9,
- "cases": [
-  {
-   "domain": "review",
-   "id": "L1",
-   "question": "把 Income 分箱看一下",
-   "status": "clarification",
-   "tools": [
-    "dataset_overview",
-    "star_distribution"
-   ],
-   "passed": true,
-   "why": "review 域没有分箱能力，不该静默给默认答案"
-  },
-  {
-   "domain": "review",
-   "id": "L2",
-   "question": "这个指标的口径是怎么定义的",
-   "status": "clarification",
-   "tools": [
-    "dataset_overview",
-    "star_distribution"
-   ],
-   "passed": true,
-   "why": "完全没听懂的问题应澄清而不是猜"
-  },
-  {
-   "domain": "review",
-   "id": "L3",
-   "question": "2004 年的差评归因",
-   "status": "ok",
-   "tools": [
-    "aspect_gap",
-    "keyword_diff",
-    "sample_comments"
-   ],
-   "passed": true,
-   "why": "2004 年样本极少，应放宽切片后仍给出结论"
-  },
-  {
-   "domain": "review",
-   "id": "L4",
-   "question": "店铺 4134768 的套餐差评率排名",
-   "status": "ok",
-   "tools": [
-    "star_distribution",
-    "deal_ranking"
-   ],
-   "passed": true,
-   "why": "shop 实体不该把套餐排名工具整个换掉"
-  },
-  {
-   "domain": "review",
-   "id": "L5",
-   "question": "为什么差评这么多？短板在哪？",
-   "status": "ok",
-   "tools": [
-    "aspect_gap",
-    "keyword_diff",
-    "sample_comments"
-   ],
-   "passed": true,
-   "why": "正常问题不该被误判成需要澄清"
-  },
-  {
-   "domain": "credit",
-   "id": "C-L1",
-   "question": "看下这个变量的分箱",
-   "status": "clarification",
-   "tools": [
-    "woe_table",
-    "iv_table"
-   ],
-   "passed": true,
-   "why": "woe_table 缺必填 feature，应反问并给候选"
-  },
-  {
-   "domain": "credit",
-   "id": "C-L2",
-   "question": "把 Income 分箱看一下",
-   "status": "clarification",
-   "tools": [
-    "woe_table",
-    "iv_table"
-   ],
-   "passed": true,
-   "why": "字段名不存在，应给候选而不是报错"
-  },
-  {
-   "domain": "credit",
-   "id": "C-L3",
-   "question": "模型效果怎么样？",
-   "status": "ok",
-   "tools": [
-    "perf_metrics",
-    "cutoff_tradeoff"
-   ],
-   "passed": true,
-   "why": "正常问题不该被误判"
-  },
-  {
-   "domain": "credit",
-   "id": "C-L4",
-   "question": "评分刻度怎么映射？",
-   "status": "ok",
-   "tools": [
-    "score_scale",
-    "perf_metrics"
-   ],
-   "passed": true,
-   "why": "正常问题不该被误判"
-  }
- ]
+  "total": 12,
+  "passed": 12,
+  "cases": [
+    {
+      "domain": "review",
+      "id": "L1",
+      "question": "把 Income 分箱看一下",
+      "status": "clarification",
+      "tools": [
+        "dataset_overview",
+        "star_distribution"
+      ],
+      "passed": true,
+      "why": "review 域没有分箱能力，不该静默给默认答案"
+    },
+    {
+      "domain": "review",
+      "id": "L2",
+      "question": "这个指标的口径是怎么定义的",
+      "status": "clarification",
+      "tools": [
+        "dataset_overview",
+        "star_distribution"
+      ],
+      "passed": true,
+      "why": "完全没听懂的问题应澄清而不是猜"
+    },
+    {
+      "domain": "review",
+      "id": "L3",
+      "question": "2004 年的差评归因",
+      "status": "ok",
+      "tools": [
+        "aspect_gap",
+        "keyword_diff",
+        "sample_comments"
+      ],
+      "passed": true,
+      "why": "2004 年样本极少，应放宽切片后仍给出结论"
+    },
+    {
+      "domain": "review",
+      "id": "L4",
+      "question": "店铺 4134768 的套餐差评率排名",
+      "status": "ok",
+      "tools": [
+        "star_distribution",
+        "deal_ranking"
+      ],
+      "passed": true,
+      "why": "shop 实体不该把套餐排名工具整个换掉"
+    },
+    {
+      "domain": "review",
+      "id": "L5",
+      "question": "为什么差评这么多？短板在哪？",
+      "status": "ok",
+      "tools": [
+        "aspect_gap",
+        "keyword_diff",
+        "sample_comments"
+      ],
+      "passed": true,
+      "why": "正常问题不该被误判成需要澄清"
+    },
+    {
+      "domain": "credit",
+      "id": "C-L1",
+      "question": "看下这个变量的分箱",
+      "status": "clarification",
+      "tools": [
+        "woe_table",
+        "iv_table"
+      ],
+      "passed": true,
+      "why": "woe_table 缺必填 feature，应反问并给候选"
+    },
+    {
+      "domain": "credit",
+      "id": "C-L2",
+      "question": "把 Income 分箱看一下",
+      "status": "clarification",
+      "tools": [
+        "woe_table",
+        "iv_table"
+      ],
+      "passed": true,
+      "why": "字段名不存在，应给候选而不是报错"
+    },
+    {
+      "domain": "credit",
+      "id": "C-L3",
+      "question": "模型效果怎么样？",
+      "status": "ok",
+      "tools": [
+        "perf_metrics",
+        "cutoff_tradeoff"
+      ],
+      "passed": true,
+      "why": "正常问题不该被误判"
+    },
+    {
+      "domain": "credit",
+      "id": "C-L4",
+      "question": "评分刻度怎么映射？",
+      "status": "ok",
+      "tools": [
+        "score_scale",
+        "perf_metrics"
+      ],
+      "passed": true,
+      "why": "正常问题不该被误判"
+    },
+    {
+      "domain": "phm",
+      "id": "P-L1",
+      "question": "这台还能飞多久",
+      "status": "clarification",
+      "tools": [
+        "unit_health",
+        "degradation_rate"
+      ],
+      "passed": true,
+      "why": "单机健康缺 unit，应反问并列出机器范围"
+    },
+    {
+      "domain": "phm",
+      "id": "P-L2",
+      "question": "请帮我分析明天的股票行情",
+      "status": "clarification",
+      "tools": [
+        "fleet_overview",
+        "uncertainty_audit"
+      ],
+      "passed": true,
+      "why": "领域外意图应返回 PHM 能力清单"
+    },
+    {
+      "domain": "phm",
+      "id": "P-L3",
+      "question": "机器1的健康如何",
+      "status": "degraded",
+      "tools": [
+        "unit_health",
+        "degradation_rate"
+      ],
+      "passed": true,
+      "why": "FD001机器1仅31循环，不足两诊断窗口；样例模式也无原始序列，均应诚实降级"
+    }
+  ]
 }

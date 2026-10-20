@@ -19,7 +19,7 @@
 | 评论归因 | `meituan_reviews.xlsx` | 开源仓库 wq624915051/meituan_text_minning | 42,038 条 |
 | 信用风险 | `cs-training.csv` | Kaggle *Give Me Some Credit* | 150,000 条 |
 | 信用风险（合规演示） | `german_credit.xlsx` | UCI *Statlog German Credit* | 1,000 条 |
-| PHM（Phase 0） | `sample_phm_units.csv` | 本地 C-MAPSS FD001 集成预测摘要 | 100 台 |
+| PHM（Stage 1 摘要） | `sample_phm_units.csv` | 本地 C-MAPSS FD001 集成预测摘要 | 100 台 |
 
 仓库自带的是 `sample_reviews.csv`（225 行）与 `sample_credit.csv`（3,000 行）。
 
@@ -65,3 +65,12 @@ cp "/tmp/mtn/美团文本分析/meituan.xlsx" data/meituan_reviews.xlsx
 - 不要把这些评论正文再分发到别处
 - 不要把本项目的分析结论说成任何公司的真实业务数据
 - 如果要在公司/课程场景使用，请确认数据来源与使用范围
+
+## PHM Stage 1 的样例边界
+
+样例保留机器级预测与离线标签，支持机队、单机点预测、区间审计、成本情景和规则候选清单。
+原始传感器、训练统计、完整模型报告不随样例分发；退化/通道/模型比较工具缺证据会降级，
+并且 pipeline_selfcheck 明确阻断未验证的对齐准入。独立 clone 能运行，不等于具备生产准入。
+
+完整八工具验收需要把 RI_PHM_ROOT 指向自己的完整 C-MAPSS 仓库，执行
+python3 scripts/verify_phm_stage1.py。来源路径与 SHA-256 会写入 results/phm_stage1.json。
