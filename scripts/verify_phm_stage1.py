@@ -15,7 +15,8 @@ sys.path.insert(0, str(ROOT))
 from insight.core.agent import Agent
 from insight.core.llm import OfflineStub
 from insight.domains import get_domain
-from insight.domains.phm import GATES, data, tools
+from insight.domains.phm import GATES, config, data, tools
+from insight.domains.phm import report as phm_report
 from scripts.run_eval import check_one
 from scripts.run_loop_eval import CASES
 
@@ -81,6 +82,10 @@ def main():
     except (FileNotFoundError, ValueError) as exc:
         ap.error(str(exc))
 
+    # 图表与问答共用同一批计算（report.py 只调 tools/decision），避免图文不一致；
+    # 必须在 checks 之前生成，否则 figures_rendered 引用不到
+    figures = phm_report.build_all(df)
+
     suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"))
     test = unittest.TextTestRunner(verbosity=1).run(suite)
     tests = {"total": test.testsRun, "passed": test.testsRun - len(test.skipped)
@@ -115,6 +120,9 @@ def main():
         "offline_evaluations": all(v["total"] == v["passed"] for v in evaluations.values()),
         "loop_evaluations": loops["total"] == loops["passed"],
         "no_torch": "torch" not in sys.modules,
+        "figures_rendered": all(Path(figures[key]).is_file()
+                                and Path(figures[key]).stat().st_size > 10_000
+                                for key in ("fleet", "interval", "calibration", "cost")),
     }
     output = {"stage": 1, "mode": "offline_rule_and_template", "passed": all(checks.values()),
               "checks": checks, "tests": tests, "evaluations": evaluations, "loop": loops,
@@ -153,6 +161,20 @@ def main():
     for domain, result in evaluations.items():
         report.append(f"- {domain} 离线评测：{result['passed']}/{result['total']}；"
                       f"数据 {result['dataset'] or '本地评论数据'}。")
+    figure_lines = [
+        "", "## 图表", "",
+        "四张图由 `insight/domains/phm/report.py` 生成，数据来自与问答相同的工具计算，"
+        "不另算一套。", "",
+        f"![机队紧急度]({os.path.relpath(figures['fleet'], ROOT / 'results')})", "",
+        f"> 哪几台进了两周窗口；虚线为 {config.WINDOW_DAYS} 天窗口与 "
+        f"{config.SERVICE_NEAR} 循环警戒线。", "",
+        f"![单机预测区间]({os.path.relpath(figures['interval'], ROOT / 'results')})", "",
+        "> 最紧急 10 台的点估计与 ±1.96σ 区间，叉号为离线复盘真值 —— 区间偏窄一目了然。", "",
+        f"![校准曲线]({os.path.relpath(figures['calibration'], ROOT / 'results')})", "",
+        "> **最重要的一张**：横轴名义覆盖率、纵轴实测覆盖率。贴近对角线才算校准过。", "",
+        f"![代价曲线]({os.path.relpath(figures['cost'], ROOT / 'results')})", "",
+        "> 告警线扫描；最低点即期望代价最优阈值，差额相对默认 30 循环标注。", "",
+    ]
     report += [
         f"- 闭环回归 {loops['passed']}/{loops['total']}，其中 PHM "
         f"{sum(row['passed'] for row in phm_loop)}/{len(phm_loop)}"
@@ -184,8 +206,11 @@ def main():
         "通用框架也不保证改写合成中的错误语义结论，不能把本次通过视作在线 LLM 安全验证。",
         "- 共享核心仅修复一处 0 值继承的兼容缺陷，保留所有既有编排与闸门机制；"
         "否则零提前期会在追问中被静默恢复默认值。",
-        "- Phase 2 的四张图与完整评测扩展、可选 RAG 尚未执行。",
-        "", "## Stage 1 主验收原文", "", Agent.render(blocked), "",
+        "- Phase 2 的图表已并入本报告；评测扩展到 12 题；可选 RAG 未执行。",
+        "",
+    ]
+    report += figure_lines
+    report += ["## Stage 1 主验收原文", "", Agent.render(blocked), "",
         "## 同会话追问原文", "", Agent.render(followup), "",
     ]
     (ROOT / "results/REPORT_phm.md").write_text("\n".join(report), encoding="utf-8")

@@ -34,7 +34,7 @@ CASES = {
         {"id": "L3", "question": "2004 年的差评归因",
          "expect_status": "ok", "expect_tools": ["aspect_gap"],
          "why": "2004 年样本极少，应放宽切片后仍给出结论"},
-        {"id": "L4", "question": "店铺 4134768 的套餐差评率排名",
+        {"id": "L4", "dataset": "full", "question": "店铺 4134768 的套餐差评率排名",
          "expect_status": "ok", "expect_tools": ["deal_ranking"],
          "why": "shop 实体不该把套餐排名工具整个换掉"},
         {"id": "L5", "question": "为什么差评这么多？短板在哪？",
@@ -73,10 +73,15 @@ def main() -> int:
 
     domains = [args.domain] if args.domain else list(CASES)
     total = passed = 0
-    rows = []
+    rows, skipped = [], []
     for dom in domains:
         agent = Agent(get_domain(dom))
+        active = str(agent.df.attrs.get("dataset") or agent.df.attrs.get("source") or "")
         for c in CASES[dom]:
+            need = c.get("dataset")
+            if need and need.lower() not in active.lower():
+                skipped.append(c["id"])
+                continue
             total += 1
             r = agent.ask(c["question"], use_llm=False)
             status = r.get("status", "ok")
@@ -99,11 +104,11 @@ def main() -> int:
                     print(f"         实际回答：{ans}")
 
     print(f"\n{'=' * 66}")
-    print(f"自修正用例：{passed}/{total} 通过")
+    print(f"自修正用例：{passed}/{total} 通过" + (f"（跳过 {skipped}）" if skipped else ""))
     out = os.path.join(ROOT, "results", "eval_loop.json")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
-        json.dump({"total": total, "passed": passed, "cases": rows},
+        json.dump({"total": total, "passed": passed, "skipped": skipped, "cases": rows},
                   f, ensure_ascii=False, indent=1)
     print(f"明细已写入 {out}")
     return 0 if passed == total else 1

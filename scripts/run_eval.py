@@ -90,12 +90,21 @@ def main() -> int:
         cases = [json.loads(l) for l in f if l.strip()]
 
     agent = Agent(get_domain(args.domain))
-    active = agent.df.attrs.get("dataset", "")
+    # review 用 source(full/sample)，credit/phm 用 dataset；统一取第一个非空值
+    active = str(agent.df.attrs.get("dataset") or agent.df.attrs.get("source") or "")
+
+    source = str(agent.df.attrs.get("source") or "")
 
     ran, skipped = [], []
     for c in cases:
         need = c.get("dataset")
-        if need and need not in active and args.domain == "credit":
+        if need and need.lower() not in active.lower():
+            skipped.append(c["id"])
+            continue
+        # needs：这条用例依赖原始序列 / model report 这类完整资产，
+        # 只有样例时不能假装通过，直接跳过并记录
+        need_src = c.get("needs")
+        if need_src and need_src.lower() not in source.lower():
             skipped.append(c["id"])
             continue
         ran.append(check_one(agent, c, args.llm, args.verbose))
@@ -103,7 +112,12 @@ def main() -> int:
     n_pass = sum(r["passed"] for r in ran)
     mode = "LLM" if args.llm else "离线"
     print(f"\n{'=' * 66}")
-    print(f"评测（{args.domain} / {mode} / 数据 {active}）：{n_pass}/{len(ran)} 通过"
+    if not ran:
+        print(f"评测（{args.domain} / 数据 {active or '未知'}）：{len(skipped)} 条用例均不适用当前数据，"
+              f"全部跳过（不算失败）")
+        print(f"跳过：{skipped}")
+        return 0
+    print(f"评测（{args.domain} / {mode} / 数据 {active or '未知'}）：{n_pass}/{len(ran)} 通过"
           f"　数字回查平均 {sum(r['grounding_rate'] for r in ran) / max(len(ran), 1):.3f}")
     if skipped:
         print(f"跳过（数据集不匹配）：{skipped}")

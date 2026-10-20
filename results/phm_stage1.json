@@ -13,7 +13,8 @@
     "unit_tests": true,
     "offline_evaluations": true,
     "loop_evaluations": true,
-    "no_torch": true
+    "no_torch": true,
+    "figures_rendered": true
   },
   "tests": {
     "total": 179,
@@ -27,8 +28,8 @@
       "domain": "phm",
       "mode": "离线",
       "dataset": "FD001",
-      "total": 9,
-      "passed": 9,
+      "total": 12,
+      "passed": 12,
       "skipped": [],
       "cases": [
         {
@@ -370,6 +371,120 @@
               "name": "gates",
               "passed": true,
               "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "phm_unit_81",
+          "question": "机器 81 的健康状况和退化趋势",
+          "passed": true,
+          "tools": [
+            "unit_health",
+            "degradation_rate"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "phm_plan_lead3",
+          "question": "备件 3 天到，哪几台两周内必须修",
+          "passed": true,
+          "tools": [
+            "maintenance_plan",
+            "fleet_overview"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "OK"
+            }
+          ]
+        },
+        {
+          "id": "phm_coverage_only",
+          "question": "区间覆盖率达标了吗",
+          "passed": true,
+          "tools": [
+            "uncertainty_audit",
+            "fleet_overview"
+          ],
+          "composer": "template",
+          "grounding_rate": 1.0,
+          "checks": [
+            {
+              "name": "tools",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "facts",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "scope",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "grounding",
+              "passed": true,
+              "detail": "OK"
+            },
+            {
+              "name": "gates",
+              "passed": true,
+              "detail": "阻断项 ['coverage_gate']，期望含 ['coverage_gate']"
             }
           ]
         }

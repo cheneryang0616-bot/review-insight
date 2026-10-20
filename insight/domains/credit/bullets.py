@@ -10,6 +10,10 @@ def bullets(res: dict, idx: int) -> List[str]:
     tag = f"[T{idx}]"
     if not f:
         return [f"- {res.get('note') or '（无可用结果）'} {tag}"]
+    # 样本不足时 facts 里只有 "n" / "xxx_compared" 之类，没有完整字段。
+    # 不拦住就会在下面按完整字段取数时 KeyError —— 这个分支由 CI 在样例数据下暴露出来。
+    if res.get("insufficient") and len(f) <= 2:
+        return [f"- {res.get('note') or '当前切片样本不足，无法给出结论'} {tag}"]
 
     if t == "dataset_profile":
         lines = [

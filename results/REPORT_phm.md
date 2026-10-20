@@ -17,6 +17,7 @@
 | offline_evaluations | PASS |
 | loop_evaluations | PASS |
 | no_torch | PASS |
+| figures_rendered | PASS |
 
 ## 真实问答与约束
 
@@ -29,7 +30,7 @@
 ## 验证证据
 
 - 单元测试：179 项，175 项通过，4 项跳过，0 项失败，0 项错误。
-- phm 离线评测：9/9；数据 FD001。
+- phm 离线评测：12/12；数据 FD001。
 - review 离线评测：15/15；数据 本地评论数据。
 - credit 离线评测：8/8；数据 give_me_some_credit(sample)。
 - 闭环回归 12/12，其中 PHM 3/3（缺机器编号、领域外意图、单机序列不足）。
@@ -57,7 +58,28 @@
 - 摘要样例可以问答，但没有原始序列或模型报告。相关工具返回 insufficient，pipeline_selfcheck 明确阻断不可验证的准入。
 - 本次只验收离线规则与模板；在线 LLM 规划可能漏强制审计，通用框架也不保证改写合成中的错误语义结论，不能把本次通过视作在线 LLM 安全验证。
 - 共享核心仅修复一处 0 值继承的兼容缺陷，保留所有既有编排与闸门机制；否则零提前期会在追问中被静默恢复默认值。
-- Phase 2 的四张图与完整评测扩展、可选 RAG 尚未执行。
+- Phase 2 的图表已并入本报告；评测扩展到 12 题；可选 RAG 未执行。
+
+
+## 图表
+
+四张图由 `insight/domains/phm/report.py` 生成，数据来自与问答相同的工具计算，不另算一套。
+
+![机队紧急度](../figures/phm/fig1_fleet_urgency.png)
+
+> 哪几台进了两周窗口；虚线为 14 天窗口与 30 循环警戒线。
+
+![单机预测区间](../figures/phm/fig2_unit_interval.png)
+
+> 最紧急 10 台的点估计与 ±1.96σ 区间，叉号为离线复盘真值 —— 区间偏窄一目了然。
+
+![校准曲线](../figures/phm/fig3_calibration.png)
+
+> **最重要的一张**：横轴名义覆盖率、纵轴实测覆盖率。贴近对角线才算校准过。
+
+![代价曲线](../figures/phm/fig4_cost_curve.png)
+
+> 告警线扫描；最低点即期望代价最优阈值，差额相对默认 30 循环标注。
 
 ## Stage 1 主验收原文
 

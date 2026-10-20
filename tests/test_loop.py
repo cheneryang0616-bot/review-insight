@@ -20,12 +20,19 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from insight.core.agent import Agent
 from insight.domains import get_domain
 from insight.domains.credit import data as credit_data
+from insight.domains.review import data as review_data
 
 try:
     credit_data.load()
     HAS_CREDIT = True
 except FileNotFoundError:
     HAS_CREDIT = False
+
+# 这条用例要靠"放宽到全量后仍能找到达标套餐"来验证，只有完整评论数据成立
+try:
+    HAS_FULL_REVIEW = review_data.load().attrs.get("source") == "full"
+except Exception:
+    HAS_FULL_REVIEW = False
 
 
 class TestReviewLoop(unittest.TestCase):
@@ -49,6 +56,7 @@ class TestReviewLoop(unittest.TestCase):
         r = self.agent.ask("店铺 4134768 的差评情况怎么样？", use_llm=False)
         self.assertEqual(r["status"], "ok")
 
+    @unittest.skipUnless(HAS_FULL_REVIEW, "需要完整评论数据")
     def test_insufficient_relaxes_and_discloses(self):
         # 该店的套餐每款都不到样本门槛 → 应放宽并显式说明改了口径
         r = self.agent.ask("店铺 4134768 的套餐差评率排名", use_llm=False)

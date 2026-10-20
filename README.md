@@ -1,5 +1,7 @@
 # insight-agent
 
+[![CI](https://github.com/cheneryang0616-bot/review-insight/actions/workflows/ci.yml/badge.svg)](https://github.com/cheneryang0616-bot/review-insight/actions/workflows/ci.yml)
+
 > 一个骨架，三个场景的分析 Agent：**美团团购评论归因**、**信用风险建模与合规**，
 > 以及 **设备健康与维护决策 PHM（Stage 1）**。
 > 自然语言提问 → 领域工具集 → **多轮闭环（观察→修复/反问）** → 带出处的结论
@@ -136,7 +138,11 @@ PHM 已接通 8 个工具与 6 条工业闸门，支持单机健康、通道代�
 | review（15 题） | **15/15** | 12/15（多次 10~12） |
 | credit（German，9 题） | **9/9** | 6/9 |
 | credit（GMC 抽样，8 题） | **8/8** | — |
-| phm（Stage 1，9 题） | **9/9**（含预期业务阻断） | 未通过在线验收 |
+| phm（Stage 1，12 题） | **12/12**（含 3 条预期业务阻断） | 未通过在线验收 |
+
+> CI 里只有脱敏样例：`review` 15 条全部跳过（需要完整评论数据），
+> `phm` 跳过 7 条（需要原始传感器序列 / model report），其余照常执行。
+> **跳过而不是"假装通过"**——脚本会打印跳过清单，退出码仍为 0。
 
 LLM 规划器的失败分三类，全部是跑出来的：
 
@@ -158,6 +164,11 @@ PHM 主验收问句“哪几台两周内必须修”：机器 34、81 成为候�
 默认备件 14 天到时两台均来不及，lead_time_gate 阻断；追问提前期改成 7 天后，
 该约束通过。所有输出均是人工复核候选，不授予生产停机权限。
 
+CI（`.github/workflows/ci.yml`）在 Python 3.9 / 3.11 双矩阵上跑：单测 + 三个领域评测 +
+闭环评测 + 图表渲染冒烟，全程离线、无 API Key、无私有资产。
+完整的 PHM Stage 1 验收需要原始序列与 model report，用 `scripts/verify_phm_stage1.py`
+在本地执行（CI 里跑不了，也不该跑）。
+
 PHM 的当前保证限于离线规则规划与模板合成。在线 LLM 路径存在漏必审工具的已知缺口，
 尚未通过在线准入验收；不要把提示词或合成后闸门报告当成强制语义拦截。
 
@@ -175,6 +186,10 @@ RI_CREDIT_DATA=german python3 scripts/ask.py "合规吗？" --domain credit
 
 # 用真实 LLM（需要 DEEPSEEK_API_KEY，或写进 ~/.agentdoc.env）
 python3 scripts/ask.py "为什么差评这么多？" --llm
+
+# 图表与 CI 冒烟
+python3 scripts/make_phm_figures.py                     # 生成 4 张图并嵌入报告
+python3 scripts/make_phm_figures.py --out-dir /tmp/figs # 只渲染（CI 用的就是这个）
 
 # 评测 / 测试 / 报告
 python3 scripts/run_eval.py --domain review

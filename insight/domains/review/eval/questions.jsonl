@@ -1,15 +1,15 @@
-{"id": "Q01", "question": "美团评论数据整体是什么情况？", "expect_tools": ["dataset_overview", "star_distribution"], "expect_facts": {"rows": 42038, "shops": 21, "bad_rate": 0.0538}}
-{"id": "Q02", "question": "星级分布怎么样？", "expect_tools": ["star_distribution"], "expect_facts": {"n": 42038, "mean_star": 4.479}}
-{"id": "Q03", "question": "哪家店的差评率最高？", "expect_tools": ["shop_ranking"], "expect_facts": {"worst_shop": "4134768", "worst_bad_rate": 0.1249}}
-{"id": "Q04", "question": "哪个套餐差评率最高？", "expect_tools": ["deal_ranking"], "expect_facts": {"worst_deal": "50元代金券（菜品）1张", "worst_bad_rate": 0.096}}
-{"id": "Q05", "question": "代金券和套餐哪个差评更多？", "expect_tools": ["deal_type_compare"], "expect_facts": {"ratio": 1.89, "higher_type": "代金券"}}
-{"id": "Q06", "question": "为什么差评这么多？短板在哪？", "expect_tools": ["aspect_gap", "keyword_diff"], "expect_facts": {"top_aspect": "口味出品"}}
-{"id": "Q07", "question": "差评里用户都在说什么？", "expect_tools": ["keyword_diff", "sample_comments"], "expect_facts": {"kw1": "拉肚子"}}
-{"id": "Q08", "question": "最近的差评率有没有变差？", "expect_tools": ["time_trend"], "expect_facts": {"last_period": "2021Q3", "last_bad_rate": 0.0294}}
-{"id": "Q09", "question": "哪个时段差评最多？", "expect_tools": ["time_slot"], "expect_facts": {"high_slot": "周五"}}
-{"id": "Q10", "question": "给我几条差评原话看看", "expect_tools": ["sample_comments"], "expect_facts": {"star_bucket": "bad"}}
-{"id": "Q11", "question": "2020年代金券和套餐的差评率分别是多少？", "expect_tools": ["deal_type_compare"], "expect_scope": {"year": 2020}, "expect_facts": {"coupon_bad_rate": 0.0289, "combo_bad_rate": 0.0316}}
-{"id": "Q12", "question": "店铺 4134768 的差评情况怎么样？", "expect_tools": ["star_distribution"], "expect_scope": {"shop": "4134768"}, "expect_facts": {"n": 873}}
-{"id": "Q13", "question": "那这家店的差评主要在骂什么？", "expect_tools": ["aspect_gap"], "expect_scope": {"shop": "4134768"}}
-{"id": "Q14", "question": "50元代金券（菜品）1张 这个套餐的问题在哪？", "expect_tools": ["aspect_gap"], "expect_scope": {"deal": "50元代金券（菜品）1张"}}
-{"id": "Q15", "question": "2019年的差评趋势怎么样？", "expect_tools": ["time_trend"], "expect_scope": {"year": 2019}}
+{"id": "Q01", "question": "美团评论数据整体是什么情况？", "expect_tools": ["dataset_overview", "star_distribution"], "expect_facts": {"rows": 42038, "shops": 21, "bad_rate": 0.0538}, "dataset": "full"}
+{"id": "Q02", "question": "星级分布怎么样？", "expect_tools": ["star_distribution"], "expect_facts": {"n": 42038, "mean_star": 4.479}, "dataset": "full"}
+{"id": "Q03", "question": "哪家店的差评率最高？", "expect_tools": ["shop_ranking"], "expect_facts": {"worst_shop": "4134768", "worst_bad_rate": 0.1249}, "dataset": "full"}
+{"id": "Q04", "question": "哪个套餐差评率最高？", "expect_tools": ["deal_ranking"], "expect_facts": {"worst_deal": "50元代金券（菜品）1张", "worst_bad_rate": 0.096}, "dataset": "full"}
+{"id": "Q05", "question": "代金券和套餐哪个差评更多？", "expect_tools": ["deal_type_compare"], "expect_facts": {"ratio": 1.89, "higher_type": "代金券"}, "dataset": "full"}
+{"id": "Q06", "question": "为什么差评这么多？短板在哪？", "expect_tools": ["aspect_gap", "keyword_diff"], "expect_facts": {"top_aspect": "口味出品"}, "dataset": "full"}
+{"id": "Q07", "question": "差评里用户都在说什么？", "expect_tools": ["keyword_diff", "sample_comments"], "expect_facts": {"kw1": "拉肚子"}, "dataset": "full"}
+{"id": "Q08", "question": "最近的差评率有没有变差？", "expect_tools": ["time_trend"], "expect_facts": {"last_period": "2021Q3", "last_bad_rate": 0.0294}, "dataset": "full"}
+{"id": "Q09", "question": "哪个时段差评最多？", "expect_tools": ["time_slot"], "expect_facts": {"high_slot": "周五"}, "dataset": "full"}
+{"id": "Q10", "question": "给我几条差评原话看看", "expect_tools": ["sample_comments"], "expect_facts": {"star_bucket": "bad"}, "dataset": "full"}
+{"id": "Q11", "question": "2020年代金券和套餐的差评率分别是多少？", "expect_tools": ["deal_type_compare"], "expect_scope": {"year": 2020}, "expect_facts": {"coupon_bad_rate": 0.0289, "combo_bad_rate": 0.0316}, "dataset": "full"}
+{"id": "Q12", "question": "店铺 4134768 的差评情况怎么样？", "expect_tools": ["star_distribution"], "expect_scope": {"shop": "4134768"}, "expect_facts": {"n": 873}, "dataset": "full"}
+{"id": "Q13", "question": "那这家店的差评主要在骂什么？", "expect_tools": ["aspect_gap"], "expect_scope": {"shop": "4134768"}, "dataset": "full"}
+{"id": "Q14", "question": "50元代金券（菜品）1张 这个套餐的问题在哪？", "expect_tools": ["aspect_gap"], "expect_scope": {"deal": "50元代金券（菜品）1张"}, "dataset": "full"}
+{"id": "Q15", "question": "2019年的差评趋势怎么样？", "expect_tools": ["time_trend"], "expect_scope": {"year": 2019}, "dataset": "full"}

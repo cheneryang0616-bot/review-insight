@@ -1,7 +1,7 @@
 {
  "domain": "review",
  "mode": "离线",
- "dataset": "",
+ "dataset": "full",
  "total": 15,
  "passed": 15,
  "skipped": [],
