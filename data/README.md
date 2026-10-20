@@ -19,8 +19,15 @@
 | 评论归因 | `meituan_reviews.xlsx` | 开源仓库 wq624915051/meituan_text_minning | 42,038 条 |
 | 信用风险 | `cs-training.csv` | Kaggle *Give Me Some Credit* | 150,000 条 |
 | 信用风险（合规演示） | `german_credit.xlsx` | UCI *Statlog German Credit* | 1,000 条 |
+| PHM（Phase 0） | `sample_phm_units.csv` | 本地 C-MAPSS FD001 集成预测摘要 | 100 台 |
 
 仓库自带的是 `sample_reviews.csv`（225 行）与 `sample_credit.csv`（3,000 行）。
+
+PHM 另带 `sample_phm_units.csv`：由 `scripts/make_phm_sample.py` 从
+`FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz` 导出全部 100 台机器的
+预测、标签、标准差、成员分歧度与当前循环数。它来自仿真测试集，不是生产设备记录；
+不包含权重与传感器原始序列。样例与完整资产复算的区间覆盖率均为 56%。
+完整资产由 `RI_PHM_ROOT` 指向的外部仓库提供，不复制进本仓库。
 
 ## 怎么拿到完整数据（想复现报告数字的人）
 

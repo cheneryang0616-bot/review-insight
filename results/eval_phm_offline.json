@@ -1,0 +1,48 @@
+{
+ "domain": "phm",
+ "mode": "离线",
+ "dataset": "FD001",
+ "total": 1,
+ "passed": 1,
+ "skipped": [],
+ "cases": [
+  {
+   "id": "phm_phase0_shutdown",
+   "question": "能不能用这个预测区间安排停机检修？",
+   "passed": true,
+   "tools": [
+    "uncertainty_audit",
+    "fleet_overview"
+   ],
+   "composer": "template",
+   "grounding_rate": 1.0,
+   "checks": [
+    {
+     "name": "tools",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "facts",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "scope",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "grounding",
+     "passed": true,
+     "detail": "OK"
+    },
+    {
+     "name": "gates",
+     "passed": true,
+     "detail": "阻断项 ['coverage_gate']，期望含 ['coverage_gate']"
+    }
+   ]
+  }
+ ]
+}

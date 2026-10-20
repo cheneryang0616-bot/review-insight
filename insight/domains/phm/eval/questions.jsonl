@@ -1,0 +1,1 @@
+{"id":"phm_phase0_shutdown","question":"能不能用这个预测区间安排停机检修？","expect_tools":["uncertainty_audit","fleet_overview"],"expect_facts":{"empirical_coverage":0.56,"nominal":0.95,"usable_for_decision":false,"units":100},"expect_gates":"block","expect_block_gates":["coverage_gate"]}

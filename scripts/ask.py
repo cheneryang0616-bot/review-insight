@@ -21,7 +21,7 @@ from insight.domains import available, get_domain
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="可复现的分析 Agent（review / credit）")
+    ap = argparse.ArgumentParser(description="可复现的分析 Agent（review / credit / phm）")
     ap.add_argument("question", help="自然语言问题")
     ap.add_argument("--domain", default="review", choices=available())
     ap.add_argument("--llm", action="store_true", help="强制使用 LLM 规划与合成")

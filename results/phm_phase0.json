@@ -1,0 +1,175 @@
+{
+  "date": "2026-10-21",
+  "mode": "offline",
+  "criteria": {
+    "coverage_56_grounded": true,
+    "coverage_gate_blocks": true,
+    "shutdown_not_authorized": true
+  },
+  "passed": true,
+  "isolated_sample_verified": true,
+  "result": {
+    "domain": "phm",
+    "question": "能不能用这个预测区间安排停机检修？",
+    "status": "ok",
+    "clarification": null,
+    "plan": [
+      {
+        "tool": "uncertainty_audit",
+        "params": {}
+      },
+      {
+        "tool": "fleet_overview",
+        "params": {}
+      }
+    ],
+    "planner": "rule",
+    "reason": "命中意图 ['uncertain']，实体 无",
+    "scope": {},
+    "results": [
+      {
+        "tool": "uncertainty_audit",
+        "params": {},
+        "table": [
+          {
+            "名义覆盖率": "95%",
+            "实测覆盖率": "56%",
+            "缺口(百分点)": "39.00",
+            "平均标准差(循环)": "5.22",
+            "准入覆盖率": "85%",
+            "覆盖率准入": "阻断"
+          }
+        ],
+        "facts": {
+          "n": 100,
+          "nominal": 0.95,
+          "empirical_coverage": 0.56,
+          "gap_pt": 38.99999999999999,
+          "mean_sigma": 5.223652765750885,
+          "min_coverage": 0.85,
+          "usable_for_decision": false,
+          "c_fn": 10.0,
+          "c_fp": 1.0,
+          "lead_time_days": 14
+        },
+        "note": "在带真实标签的仿真测试集上复算 pred ± 1.96σ 的闭区间覆盖率；属于回顾性审计，不是在线故障概率。覆盖率达标也不等于可直接安排停机。",
+        "insufficient": false
+      },
+      {
+        "tool": "fleet_overview",
+        "params": {},
+        "table": [
+          {
+            "测试机器数": 100,
+            "预测不超过30循环": 20,
+            "预测不超过60循环": 35,
+            "RUL中位数": "89.49",
+            "最短RUL机器": 34
+          }
+        ],
+        "facts": {
+          "units": 100,
+          "need_service_30": 20,
+          "need_service_60": 35,
+          "median_rul": 89.49304580688477,
+          "worst_unit": 34,
+          "service_near": 30,
+          "service_mid": 60,
+          "c_fn": 10.0,
+          "c_fp": 1.0,
+          "lead_time_days": 14
+        },
+        "note": "按预测分档；计数是人工复核候选，不表示已经授权停机。C-MAPSS 是仿真数据。",
+        "insufficient": false
+      }
+    ],
+    "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final。RUL 单位为运行循环数。\n\n### 事实\n- 名义覆盖率 95%，实测覆盖率 **56%**，缺口 39.00 个百分点；准入线 85%。[T1]\n- 预测标准差均值 5.22 循环；覆盖率准入未通过。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n\n### 结论\n1. 不能用这个预测区间安排停机检修：覆盖率未达到准入线，coverage_gate 阻断。应先使用独立校准集开展共形预测校准，并重新验证覆盖率。当前只支持人工复核候选，不生成停机工单。[T1]\n2. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；均非真实产线参数。本轮未使用这些假设做优化或排期；RUL 循环数尚未换算为天。后续决策阶段再支持提问覆盖。[T1]\n3. C-MAPSS 是仿真数据，本结果用于方法验证。",
+    "composer": "template",
+    "grounding": {
+      "checked": 14,
+      "supported": 14,
+      "unsupported": [],
+      "skipped_structural": 5,
+      "rate": 1.0,
+      "passed": true,
+      "citations": [
+        1,
+        2
+      ],
+      "cite_ok": true,
+      "pool_size": 34
+    },
+    "gates": {
+      "results": [
+        {
+          "name": "numeric_trace",
+          "desc": "答案中所有数字必须可追溯到工具输出",
+          "level": "error",
+          "passed": true,
+          "detail": "14/14 可追溯",
+          "value": 1.0
+        },
+        {
+          "name": "tool_health",
+          "desc": "所有工具调用必须成功",
+          "level": "error",
+          "passed": true,
+          "detail": "全部成功",
+          "value": null
+        },
+        {
+          "name": "coverage_gate",
+          "desc": "区间实测覆盖率须达到名义覆盖率减去容忍差",
+          "level": "error",
+          "passed": false,
+          "detail": "区间覆盖率未达到准入线，禁止用该区间安排停机检修",
+          "value": 0.56
+        }
+      ],
+      "checked": 3,
+      "passed": false,
+      "blocking": [
+        {
+          "name": "coverage_gate",
+          "desc": "区间实测覆盖率须达到名义覆盖率减去容忍差",
+          "level": "error",
+          "passed": false,
+          "detail": "区间覆盖率未达到准入线，禁止用该区间安排停机检修",
+          "value": 0.56
+        }
+      ],
+      "warnings": []
+    },
+    "trajectory": [
+      {
+        "turn": 1,
+        "calls": [
+          "uncertainty_audit",
+          "fleet_overview"
+        ],
+        "issues": []
+      }
+    ],
+    "turns": 1,
+    "llm_error": null
+  },
+  "regression": {
+    "review": {
+      "dataset": "",
+      "total": 15,
+      "passed": 15,
+      "skipped": []
+    },
+    "credit": {
+      "dataset": "give_me_some_credit(sample)",
+      "total": 8,
+      "passed": 8,
+      "skipped": [
+        "C06",
+        "C07",
+        "C08",
+        "C09"
+      ]
+    }
+  }
+}

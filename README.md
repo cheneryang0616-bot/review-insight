@@ -1,13 +1,19 @@
 # insight-agent
 
-> 一个骨架，两个场景的分析 Agent：**美团团购评论归因** 与 **信用风险建模与合规**。
+> 一个骨架，三个场景的分析 Agent：**美团团购评论归因**、**信用风险建模与合规**，
+> 以及 **设备健康与维护决策 PHM（Phase 0 原型）**。
 > 自然语言提问 → 领域工具集 → **多轮闭环（观察→修复/反问）** → 带出处的结论
 > → 数字回查 + 业务断言双重质检。
 
 ```bash
 python scripts/ask.py "为什么差评这么多？短板在哪？"            # 场景一
 python scripts/ask.py "模型效果怎么样？" --domain credit        # 场景二
+python scripts/ask.py "能不能用这个预测区间安排停机检修？" --domain phm --no-llm
 ```
+
+PHM 当前接通机队总览、区间审计与覆盖率闸门。真实预测的名义覆盖率为 95%，
+实测仅 **56%**，因此明确拒绝据此安排停机；CLI 退出码 **2** 表示预期的业务阻断。
+见 [Phase 0 验收报告](results/REPORT_phm.md) 与 [设计说明](docs/PHM_DESIGN.md)。
 
 **它不是「让 LLM 看一眼数据然后写分析」**，而是：
 
@@ -18,19 +24,21 @@ python scripts/ask.py "模型效果怎么样？" --domain credit        # 场景
 
 ---
 
-## 为什么做成"一个框架 + 两个场景"
+## 为什么做成"一个框架 + 多个场景"
 
 单独一个评论分析 Agent，或者单独一个风控 Agent，都只是一个项目。
-但这两个领域的**失败形态完全不同**：
+不同领域的**失败形态不同**：
 
-| | 场景一：评论归因 | 场景二：信用风险 |
-|---|---|---|
-| 错误长什么样 | 数字算错、把子集当全量 | **数字全对，但结论违反硬约束**（用了性别字段） |
-| 质检靠什么 | 数字回查 + 样本量门槛 | 数字回查 + **断言闸门**（KS/IV/单调性/合规字段） |
-| 分析原语 | 负面表述率、log-odds 关键词、趋势异动 | WOE/IV 分箱、评分卡、KS/AUC、通过率权衡 |
+| | 场景一：评论归因 | 场景二：信用风险 | 场景三：PHM（Phase 0） |
+|---|---|---|---|
+| 错误长什么样 | 数字算错、把子集当全量 | **数字全对，但结论违反硬约束**（用了性别字段） | 区间过窄却用于停机决策 |
+| 质检靠什么 | 数字回查 + 样本量门槛 | 数字回查 + **断言闸门**（KS/IV/单调性/合规字段） | 数字回查 + **覆盖率准入闸门** |
+| 分析原语 | 负面表述率、log-odds 关键词、趋势异动 | WOE/IV 分箱、评分卡、KS/AUC、通过率权衡 | 时序预测摘要 + 区间覆盖率审计；决策优化待后续阶段 |
+
+领域注册：`phm`：设备健康与维护决策（时序 + 决策优化；本次仅完成 Phase 0）。
 
 所以真正可复用的是**骨架**（规划→执行→合成→质检→修复），不是分析逻辑。
-把两个场景都跑通，才证明"我是按框架在做，不是按模板在做"。
+前两个完整领域与 PHM 原型复用同一套规划、闭环、数字回查与闸门机制。
 
 | 层 | 代码位置 | 是否领域无关 |
 |---|---|---|
@@ -128,6 +136,7 @@ python scripts/ask.py "模型效果怎么样？" --domain credit        # 场景
 | review（15 题） | **15/15** | 12/15（多次 10~12） |
 | credit（German，9 题） | **9/9** | 6/9 |
 | credit（GMC 抽样，8 题） | **8/8** | — |
+| phm（Phase 0，1 题） | **1/1**（预期 coverage_gate 阻断） | 未验证 |
 
 LLM 规划器的失败分三类，全部是跑出来的：
 
@@ -143,6 +152,10 @@ LLM 规划器的失败分三类，全部是跑出来的：
 
 单元测试：**框架 21 + 场景一 37 + 场景二 14 + 闭环 11 = 83 个**，全部通过。
 自修正用例 **9/9**（改动前基线 4/9）。
+
+PHM 新增 **18 项测试**。2026-10-21 全套 101 项测试：97 项通过、4 项因缺少
+German Credit 数据跳过；PHM 离线问答的 14/14 个数字可回查。
+PHM 的当前结论来自规则规划与模板合成，尚未验证在线 LLM 的推理或拒绝行为。
 
 ---
 
@@ -162,11 +175,26 @@ python3 scripts/ask.py "为什么差评这么多？" --llm
 # 评测 / 测试 / 报告
 python3 scripts/run_eval.py --domain review
 python3 scripts/run_eval.py --domain credit
+python3 scripts/run_eval.py --domain phm     # Phase 0：检查预期的覆盖率阻断
 python3 scripts/run_loop_eval.py            # 自修正用例：失败之后的行为
 python3 -m unittest discover -s tests -v
 python3 scripts/build_report.py --domain review
 RI_CREDIT_DATA=german python3 scripts/build_report.py --domain credit
 ```
+
+PHM 默认读取外部 C-MAPSS 仓库，不复制 artifacts。可设置：
+
+```bash
+export RI_PHM_ROOT=/Users/zhuan/c-mapss_train
+python3 scripts/ask.py "能不能用这个预测区间安排停机检修？" --domain phm --no-llm
+# 本例退出码为 2：数字回查通过，但覆盖率闸门阻断
+python3 scripts/make_phm_sample.py --root "$RI_PHM_ROOT"
+```
+
+未设置 `RI_PHM_ROOT` 且默认资产目录不存在时，自动使用仓库自带的
+`data/sample_phm_units.csv`（FD001 全部 100 台机器的真实预测摘要），独立 clone 也能运行。
+显式配置的资产路径错误会报错。当前只提供机队与区间审计，不生成停机工单；
+成本与备件提前期为示意假设，RUL 的循环数不能直接当作天数。
 
 示例输出（离线，数字全部可回查）：
 
@@ -194,11 +222,14 @@ insight/
       config.py data.py lexicon.py stats.py tools.py planner_spec.py bullets.py report.py eval/
     credit/                # 场景二：信用风险
       config.py data.py stats.py tools.py planner_spec.py bullets.py report.py eval/
+    phm/                   # 场景三：设备健康（Phase 0）
+      config.py data.py tools.py planner_spec.py bullets.py eval/
 scripts/     ask.py / run_eval.py / build_report.py / make_samples.py
-tests/       test_core.py（21） / test_review.py（37） / test_credit.py（14） / test_loop.py（11）
-data/        sample_reviews.csv / sample_credit.csv + README.md（完整数据获取方式）
+             make_phm_sample.py
+tests/       test_core.py（21） / test_review.py（37） / test_credit.py（14） / test_loop.py（11） / test_phm.py（18）
+data/        sample_reviews.csv / sample_credit.csv / sample_phm_units.csv + README.md
 figures/     review/（6 张） credit/（6 张）
-results/     REPORT_review.md / REPORT_credit.md / eval_*.json
+results/     REPORT_review.md / REPORT_credit.md / REPORT_phm.md / phm_phase0.json / eval_*.json
 ```
 
 ---
