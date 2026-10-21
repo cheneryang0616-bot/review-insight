@@ -19,6 +19,8 @@ def bullets(res, idx):
             f"{f['need_service_30']} 台，不超过 {f['service_mid']} 循环的有 "
             f"{f['need_service_60']} 台；这些是人工复核候选。{cite}",
             f"- 预测 RUL 中位数 {f['median_rul']:.2f} 循环，最短的是机器 {f['worst_unit']}。{cite}",
+            f"- 预测资产指纹 **{f['asset_id']}**（{f['asset_mtime_iso']}，"
+            f"{f['asset_bytes']} B）；同一指纹才保证可复现。{cite}",
         ]
     if name == "unit_health":
         return [

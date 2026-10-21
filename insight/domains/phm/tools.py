@@ -49,9 +49,14 @@ def _prepare(df, dataset=None, **context):
 
 def _base(df, settings):
     # 所有工具均携带同一组有效参数，防止合并 facts 时默认值覆盖提问参数。
+    # 资产指纹放在这里：任何一轮回答都能说清"这份结论来自哪个文件、哪一版"。
+    info = data.asset_summary(df)
     facts = {
         "dataset": df.attrs.get("dataset", config.DATASET), **settings,
         "prediction_source": str(df.attrs.get("path", "in_memory_test_fixture")),
+        "asset_id": info["asset_id"], "asset_bytes": info["asset_bytes"],
+        "asset_mtime_ns": info["asset_mtime_ns"],
+        "asset_mtime_iso": info["asset_mtime_iso"],
         "bad_units": [int(u) for u in df.loc[df["pred"] < 0, "unit"]],
     }
     facts.update(data.pipeline_check(df))
@@ -96,7 +101,8 @@ def fleet_overview(df, dataset=None, **context):
         "worst_unit": int(df.loc[df["pred"].idxmin(), "unit"]),
         "service_near": config.SERVICE_NEAR, "service_mid": config.SERVICE_MID,
     }
-    table = [{"测试机器数": facts["units"], "预测不超过30循环": facts["need_service_30"],
+    table = [{"预测资产": f"{facts['asset_id']}（{facts['asset_mtime_iso']}）",
+              "测试机器数": facts["units"], "预测不超过30循环": facts["need_service_30"],
               "预测不超过60循环": facts["need_service_60"],
               "RUL中位数": f"{facts['median_rul']:.2f}", "最短RUL机器": facts["worst_unit"]}]
     return _result("fleet_overview", table, facts, "按预测分档，属于人工复核候选；C-MAPSS 是仿真数据。",

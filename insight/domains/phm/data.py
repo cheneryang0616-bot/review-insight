@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """只读机器级预测；不加载权重，不导入 torch，不向 LLM 暴露 npz。"""
+import datetime
+import hashlib
 import importlib.util
 import json
 import os
@@ -45,6 +47,54 @@ def asset_context(df, dataset=None):
     return {"root": resolve_root(root), "dataset": dataset}
 
 
+@lru_cache(maxsize=16)
+def _sha256_cached(path_str, mtime_ns, size):
+    """整个文件算一次 sha256；缓存键用 mtime+size，文件一变自动重算。
+
+    只读预测文件只有几 KB（FD001 7.7K / FD004 17K），全量哈希成本可忽略，
+    比"只哈希前 4MB"更不容易出现"文件变了指纹没变"的假相同。
+    """
+    return hashlib.sha256(Path(path_str).read_bytes()).hexdigest()
+
+
+def fingerprint(path):
+    """预测资产的指纹：来源类型 + sha256 前 8 位 + 大小 + mtime。
+
+    为什么要这个：报告里写着"运行 FD001_xxx_final"，但没人知道那份 npz 是不是被替换过。
+    指纹让"这份结论来自哪个文件、哪一版"变成可核对的事实，而不是凭记忆。
+    """
+    path = Path(path)
+    stat = path.stat()
+    sha = _sha256_cached(str(path), int(stat.st_mtime_ns), int(stat.st_size))
+    kind = "npz" if path.suffix.lower() == ".npz" else "sample"
+    return {
+        "asset_id": f"{kind}:{sha[:8]}",
+        "asset_sha256": sha,
+        "asset_kind": kind,
+        "asset_bytes": int(stat.st_size),
+        "asset_mtime_ns": int(stat.st_mtime_ns),
+    }
+
+
+def asset_summary(df):
+    """给工具的 facts / 展示层用的指纹摘要（含人类可读时间）。"""
+    ns = df.attrs.get("asset_mtime_ns")
+    iso = ""
+    if ns:
+        try:
+            iso = datetime.datetime.fromtimestamp(int(ns) / 1e9).strftime("%Y-%m-%d %H:%M")
+        except (OverflowError, OSError, ValueError):
+            iso = ""
+    return {
+        "asset_id": str(df.attrs.get("asset_id") or "unknown"),
+        "asset_sha256": str(df.attrs.get("asset_sha256") or ""),
+        "asset_kind": str(df.attrs.get("asset_kind") or ""),
+        "asset_bytes": int(df.attrs.get("asset_bytes") or 0),
+        "asset_mtime_ns": int(ns or 0),
+        "asset_mtime_iso": iso,
+    }
+
+
 def _frame(values, **attrs):
     df = pd.DataFrame(values)
     missing = set(BASE_COLUMNS) - set(df)
@@ -86,7 +136,8 @@ def load_sample(path=None):
         if key not in raw or not raw[key].eq(expected).all():
             raise ValueError(f"PHM 样例 {key} 与默认预测来源不一致")
     return _frame(raw.loc[:, list(BASE_COLUMNS)], dataset=config.DATASET,
-                  run=config.RUN, source="sample", path=str(path), root=None)
+                  run=config.RUN, source="sample", path=str(path), root=None,
+                  **fingerprint(path))
 
 
 def load(root=None, dataset=None):
@@ -123,7 +174,8 @@ def load(root=None, dataset=None):
         "unit": arrays["u_test"], "y_true": arrays["y_test"],
         "pred": arrays["pred_ensemble"], "sigma": arrays["sigma"],
         "member_std": members.std(axis=0), "end_cycle": arrays["end_cycle"],
-    }, dataset=dataset, run=run, source="full", path=str(path), root=str(root))
+    }, dataset=dataset, run=run, source="full", path=str(path), root=str(root),
+        **fingerprint(path))
 
 
 @lru_cache(maxsize=16)
@@ -297,5 +349,8 @@ def scope_desc(df=None, **scope):
             return (f"C-MAPSS 仿真数据 {requested} 当前不可用；当前来源未提供该数据集资产。"
                     "RUL 单位为运行循环数。")
     source = "真实预测资产" if df.attrs["source"] == "full" else "仓库自带的真实预测摘要样例"
+    info = asset_summary(df)
+    stamp = f"，{info['asset_mtime_iso']}" if info["asset_mtime_iso"] else ""
     return (f"C-MAPSS 仿真数据 {df.attrs['dataset']}；{len(df)} 台测试发动机；"
-            f"{source}；运行 {df.attrs['run']}。RUL 单位为运行循环数。")
+            f"{source}；运行 {df.attrs['run']}；预测资产 {info['asset_id']}{stamp}。"
+            f"RUL 单位为运行循环数。")

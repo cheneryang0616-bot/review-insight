@@ -120,6 +120,10 @@ def main():
         "offline_evaluations": all(v["total"] == v["passed"] for v in evaluations.values()),
         "loop_evaluations": loops["total"] == loops["passed"],
         "no_torch": "torch" not in sys.modules,
+        "asset_fingerprint_matches": bool(
+            df.attrs.get("asset_sha256")
+            and any(row["path"] == str(df.attrs.get("path"))
+                    and row["sha256"] == df.attrs["asset_sha256"] for row in manifest)),
         "figures_rendered": all(Path(figures[key]).is_file()
                                 and Path(figures[key]).stat().st_size > 10_000
                                 for key in ("fleet", "interval", "calibration", "cost")),
@@ -193,6 +197,9 @@ def main():
         "单机数字回查至 predictions.npz 的 field[u_test == unit]；原始标签为"
         " RUL_FD00X.txt 第 unit 行；通道为原始 test 文件的 unit/cycle 选择器、"
         "最后窗口与训练统计计算。模型指标可回查 summary 与各 report.json 的 ensemble 字段。",
+        f"- 预测资产指纹 `{df.attrs.get('asset_id')}`（{data.asset_summary(df)['asset_mtime_iso']}，"
+        f"{df.attrs.get('asset_bytes')} B）；sha256 与上方 manifest 中 predictions.npz 逐字节一致，"
+        f"任何一轮问答的分析范围里都会显示该指纹。",
         "", "## 假设与边界", "",
         "- C-MAPSS 是仿真数据；成本、提前期、每天循环数和维护窗口均为显式假设，可在提问中覆盖。",
         "- 排期是规则候选清单，没有维修记录，未校验真实停机窗口、维修容量、库存或工作日历。",

@@ -14,11 +14,12 @@
     "offline_evaluations": true,
     "loop_evaluations": true,
     "no_torch": true,
+    "asset_fingerprint_matches": true,
     "figures_rendered": true
   },
   "tests": {
-    "total": 179,
-    "passed": 175,
+    "total": 188,
+    "passed": 184,
     "skipped": 4,
     "failed": 0,
     "errors": 0
@@ -1543,6 +1544,10 @@
             "cycles_per_day": 1.0,
             "risk_horizon_cycles": 30.0,
             "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "asset_id": "npz:326dddb4",
+            "asset_bytes": 7872,
+            "asset_mtime_ns": 1790021578767410545,
+            "asset_mtime_iso": "2026-09-22 04:12",
             "bad_units": [],
             "pipeline_ok": true,
             "u_count": 100,
@@ -1577,6 +1582,7 @@
           },
           "table": [
             {
+              "预测资产": "npz:326dddb4（2026-09-22 04:12）",
               "测试机器数": 100,
               "预测不超过30循环": 20,
               "预测不超过60循环": 35,
@@ -1593,6 +1599,10 @@
             "cycles_per_day": 1.0,
             "risk_horizon_cycles": 30.0,
             "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "asset_id": "npz:326dddb4",
+            "asset_bytes": 7872,
+            "asset_mtime_ns": 1790021578767410545,
+            "asset_mtime_iso": "2026-09-22 04:12",
             "bad_units": [],
             "pipeline_ok": true,
             "u_count": 100,
@@ -1615,13 +1625,13 @@
           "insufficient": false
         }
       ],
-      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final。RUL 单位为运行循环数。\n\n### 事实\n- 名义覆盖率 95%，实测覆盖率 **56%**，缺口 39.00 个百分点；准入线 85%。[T1]\n- 预测标准差均值 5.22 循环；覆盖率准入未通过。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n\n### 结论\n1. 不能用这个预测区间安排停机检修：覆盖率未达到准入线，coverage_gate 阻断。应先使用独立校准集开展共形预测校准，并重新验证覆盖率。[T1]\n2. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n3. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
+      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final；预测资产 npz:326dddb4，2026-09-22 04:12。RUL 单位为运行循环数。\n\n### 事实\n- 名义覆盖率 95%，实测覆盖率 **56%**，缺口 39.00 个百分点；准入线 85%。[T1]\n- 预测标准差均值 5.22 循环；覆盖率准入未通过。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n- 预测资产指纹 **npz:326dddb4**（2026-09-22 04:12，7872 B）；同一指纹才保证可复现。[T2]\n\n### 结论\n1. 不能用这个预测区间安排停机检修：覆盖率未达到准入线，coverage_gate 阻断。应先使用独立校准集开展共形预测校准，并重新验证覆盖率。[T1]\n2. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n3. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
       "composer": "template",
       "grounding": {
-        "checked": 16,
-        "supported": 16,
+        "checked": 21,
+        "supported": 21,
         "unsupported": [],
-        "skipped_structural": 6,
+        "skipped_structural": 14,
         "rate": 1.0,
         "passed": true,
         "citations": [
@@ -1629,7 +1639,7 @@
           2
         ],
         "cite_ok": true,
-        "pool_size": 58
+        "pool_size": 86
       },
       "gates": {
         "results": [
@@ -1638,7 +1648,7 @@
             "desc": "答案中所有数字必须可追溯到工具输出",
             "level": "error",
             "passed": true,
-            "detail": "16/16 可追溯",
+            "detail": "21/21 可追溯",
             "value": 1.0
           },
           {
@@ -1788,6 +1798,10 @@
             "cycles_per_day": 1.0,
             "risk_horizon_cycles": 30.0,
             "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "asset_id": "npz:326dddb4",
+            "asset_bytes": 7872,
+            "asset_mtime_ns": 1790021578767410545,
+            "asset_mtime_iso": "2026-09-22 04:12",
             "bad_units": [],
             "pipeline_ok": true,
             "u_count": 100,
@@ -1845,6 +1859,7 @@
           },
           "table": [
             {
+              "预测资产": "npz:326dddb4（2026-09-22 04:12）",
               "测试机器数": 100,
               "预测不超过30循环": 20,
               "预测不超过60循环": 35,
@@ -1861,6 +1876,10 @@
             "cycles_per_day": 1.0,
             "risk_horizon_cycles": 30.0,
             "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "asset_id": "npz:326dddb4",
+            "asset_bytes": 7872,
+            "asset_mtime_ns": 1790021578767410545,
+            "asset_mtime_iso": "2026-09-22 04:12",
             "bad_units": [],
             "pipeline_ok": true,
             "u_count": 100,
@@ -1883,13 +1902,13 @@
           "insufficient": false
         }
       ],
-      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final。RUL 单位为运行循环数。\n\n### 事实\n- 未来 14 天的点预测候选为 2 台，备件来不及的有 2 台。[T1]\n- 候选机器 34：预计相对今天第 9.66 天维护，原始下单日 -4.34，建议下单日 0.00；备件来不及，当前方案不可执行。[T1]\n- 候选机器 81：预计相对今天第 10.80 天维护，原始下单日 -3.20，建议下单日 0.00；备件来不及，当前方案不可执行。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n\n### 结论\n1. 本轮是点预测或代理指标复核；缺少完整约束与区间准入验证，不能据此授权生产停机。\n2. lead_time_gate 阻断：2 台候选机器今天下单也来不及。需人工核实库存、供应提前期与维护窗口后重算；当前清单不可执行。[T1]\n3. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n4. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
+      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final；预测资产 npz:326dddb4，2026-09-22 04:12。RUL 单位为运行循环数。\n\n### 事实\n- 未来 14 天的点预测候选为 2 台，备件来不及的有 2 台。[T1]\n- 候选机器 34：预计相对今天第 9.66 天维护，原始下单日 -4.34，建议下单日 0.00；备件来不及，当前方案不可执行。[T1]\n- 候选机器 81：预计相对今天第 10.80 天维护，原始下单日 -3.20，建议下单日 0.00；备件来不及，当前方案不可执行。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n- 预测资产指纹 **npz:326dddb4**（2026-09-22 04:12，7872 B）；同一指纹才保证可复现。[T2]\n\n### 结论\n1. 本轮是点预测或代理指标复核；缺少完整约束与区间准入验证，不能据此授权生产停机。\n2. lead_time_gate 阻断：2 台候选机器今天下单也来不及。需人工核实库存、供应提前期与维护窗口后重算；当前清单不可执行。[T1]\n3. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n4. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
       "composer": "template",
       "grounding": {
-        "checked": 20,
-        "supported": 20,
+        "checked": 25,
+        "supported": 25,
         "unsupported": [],
-        "skipped_structural": 10,
+        "skipped_structural": 18,
         "rate": 1.0,
         "passed": true,
         "citations": [
@@ -1897,7 +1916,7 @@
           2
         ],
         "cite_ok": true,
-        "pool_size": 57
+        "pool_size": 85
       },
       "gates": {
         "results": [
@@ -1906,7 +1925,7 @@
             "desc": "答案中所有数字必须可追溯到工具输出",
             "level": "error",
             "passed": true,
-            "detail": "20/20 可追溯",
+            "detail": "25/25 可追溯",
             "value": 1.0
           },
           {
@@ -2059,6 +2078,10 @@
             "cycles_per_day": 1.0,
             "risk_horizon_cycles": 30.0,
             "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "asset_id": "npz:326dddb4",
+            "asset_bytes": 7872,
+            "asset_mtime_ns": 1790021578767410545,
+            "asset_mtime_iso": "2026-09-22 04:12",
             "bad_units": [],
             "pipeline_ok": true,
             "u_count": 100,
@@ -2113,6 +2136,7 @@
           },
           "table": [
             {
+              "预测资产": "npz:326dddb4（2026-09-22 04:12）",
               "测试机器数": 100,
               "预测不超过30循环": 20,
               "预测不超过60循环": 35,
@@ -2129,6 +2153,10 @@
             "cycles_per_day": 1.0,
             "risk_horizon_cycles": 30.0,
             "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "asset_id": "npz:326dddb4",
+            "asset_bytes": 7872,
+            "asset_mtime_ns": 1790021578767410545,
+            "asset_mtime_iso": "2026-09-22 04:12",
             "bad_units": [],
             "pipeline_ok": true,
             "u_count": 100,
@@ -2151,13 +2179,13 @@
           "insufficient": false
         }
       ],
-      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final。RUL 单位为运行循环数。\n\n### 事实\n- 未来 14 天的点预测候选为 2 台，备件来不及的有 0 台。[T1]\n- 候选机器 34：预计相对今天第 9.66 天维护，原始下单日 2.66，建议下单日 2.66；提前期检查通过，仍待人工复核。[T1]\n- 候选机器 81：预计相对今天第 10.80 天维护，原始下单日 3.80，建议下单日 3.80；提前期检查通过，仍待人工复核。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n\n### 结论\n1. 本轮是点预测或代理指标复核；缺少完整约束与区间准入验证，不能据此授权生产停机。\n2. 当前候选清单的提前期约束通过；未验证维修容量与真实停机窗口，仍需人工复核。[T1]\n3. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 7 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n4. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
+      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final；预测资产 npz:326dddb4，2026-09-22 04:12。RUL 单位为运行循环数。\n\n### 事实\n- 未来 14 天的点预测候选为 2 台，备件来不及的有 0 台。[T1]\n- 候选机器 34：预计相对今天第 9.66 天维护，原始下单日 2.66，建议下单日 2.66；提前期检查通过，仍待人工复核。[T1]\n- 候选机器 81：预计相对今天第 10.80 天维护，原始下单日 3.80，建议下单日 3.80；提前期检查通过，仍待人工复核。[T1]\n- 机队共 100 台，预测 RUL 不超过 30 循环的有 20 台，不超过 60 循环的有 35 台；这些是人工复核候选。[T2]\n- 预测 RUL 中位数 89.49 循环，最短的是机器 34。[T2]\n- 预测资产指纹 **npz:326dddb4**（2026-09-22 04:12，7872 B）；同一指纹才保证可复现。[T2]\n\n### 结论\n1. 本轮是点预测或代理指标复核；缺少完整约束与区间准入验证，不能据此授权生产停机。\n2. 当前候选清单的提前期约束通过；未验证维修容量与真实停机窗口，仍需人工复核。[T1]\n3. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 7 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n4. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
       "composer": "template",
       "grounding": {
-        "checked": 19,
-        "supported": 19,
+        "checked": 24,
+        "supported": 24,
         "unsupported": [],
-        "skipped_structural": 10,
+        "skipped_structural": 18,
         "rate": 1.0,
         "passed": true,
         "citations": [
@@ -2165,7 +2193,7 @@
           2
         ],
         "cite_ok": true,
-        "pool_size": 57
+        "pool_size": 85
       },
       "gates": {
         "results": [
@@ -2174,7 +2202,7 @@
             "desc": "答案中所有数字必须可追溯到工具输出",
             "level": "error",
             "passed": true,
-            "detail": "19/19 可追溯",
+            "detail": "24/24 可追溯",
             "value": 1.0
           },
           {
@@ -2817,6 +2845,10 @@
             "cycles_per_day": 1.0,
             "risk_horizon_cycles": 30.0,
             "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "asset_id": "npz:326dddb4",
+            "asset_bytes": 7872,
+            "asset_mtime_ns": 1790021578767410545,
+            "asset_mtime_iso": "2026-09-22 04:12",
             "bad_units": [],
             "pipeline_ok": true,
             "u_count": 100,
@@ -3423,6 +3455,10 @@
             "cycles_per_day": 1.0,
             "risk_horizon_cycles": 30.0,
             "prediction_source": "/Users/zhuan/c-mapss_train/artifacts/FD001_cnn_bilstm_attn_w30_mrul125_final/predictions.npz",
+            "asset_id": "npz:326dddb4",
+            "asset_bytes": 7872,
+            "asset_mtime_ns": 1790021578767410545,
+            "asset_mtime_iso": "2026-09-22 04:12",
             "bad_units": [],
             "pipeline_ok": true,
             "u_count": 100,
@@ -3445,13 +3481,13 @@
           "insufficient": false
         }
       ],
-      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final。RUL 单位为运行循环数。\n\n### 事实\n- 固定风险时间窗 30 循环，期望代价近似最优告警线为 32.7404 循环，触发 23 台告警。[T1]\n- 机队总期望代价 23.7020，默认 30 循环告警线的代价 30.9130，降低 7.2110 假设成本单位；这是未校准正态分布下的情景分析，不准入实际决策。[T1]\n- 名义覆盖率 95%，实测覆盖率 **56%**，缺口 39.00 个百分点；准入线 85%。[T2]\n- 预测标准差均值 5.22 循环；覆盖率准入未通过。[T2]\n\n### 结论\n1. 不能用这个预测区间安排停机检修：覆盖率未达到准入线，coverage_gate 阻断。应先使用独立校准集开展共形预测校准，并重新验证覆盖率。[T2]\n2. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n3. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
+      "answer": "### 分析范围\nC-MAPSS 仿真数据 FD001；100 台测试发动机；真实预测资产；运行 FD001_cnn_bilstm_attn_w30_mrul125_final；预测资产 npz:326dddb4，2026-09-22 04:12。RUL 单位为运行循环数。\n\n### 事实\n- 固定风险时间窗 30 循环，期望代价近似最优告警线为 32.7404 循环，触发 23 台告警。[T1]\n- 机队总期望代价 23.7020，默认 30 循环告警线的代价 30.9130，降低 7.2110 假设成本单位；这是未校准正态分布下的情景分析，不准入实际决策。[T1]\n- 名义覆盖率 95%，实测覆盖率 **56%**，缺口 39.00 个百分点；准入线 85%。[T2]\n- 预测标准差均值 5.22 循环；覆盖率准入未通过。[T2]\n\n### 结论\n1. 不能用这个预测区间安排停机检修：覆盖率未达到准入线，coverage_gate 阻断。应先使用独立校准集开展共形预测校准，并重新验证覆盖率。[T2]\n2. 成本与提前期假设：漏报代价 : 误报代价 = 10 : 1，备件提前期 14 天；每天 1 循环、维护窗口 14 天、成本风险时间窗 30 循环。这些均非真实产线参数，可在提问中覆盖。[T1]\n3. C-MAPSS 是仿真数据；排期基于规则与假设，没有维修记录支持，本结果用于可审计的工程方法验证。",
       "composer": "template",
       "grounding": {
-        "checked": 16,
-        "supported": 16,
+        "checked": 18,
+        "supported": 18,
         "unsupported": [],
-        "skipped_structural": 6,
+        "skipped_structural": 10,
         "rate": 1.0,
         "passed": true,
         "citations": [
@@ -3459,7 +3495,7 @@
           2
         ],
         "cite_ok": true,
-        "pool_size": 363
+        "pool_size": 385
       },
       "gates": {
         "results": [
@@ -3468,7 +3504,7 @@
             "desc": "答案中所有数字必须可追溯到工具输出",
             "level": "error",
             "passed": true,
-            "detail": "16/16 可追溯",
+            "detail": "18/18 可追溯",
             "value": 1.0
           },
           {
